@@ -17,6 +17,7 @@ import bindLeafletLayer from "@sigma/layer-leaflet";
 import Graph from "graphology";
 import type { Attributes } from "graphology-types";
 import "@react-sigma/core/lib/style.css";
+import "./basic-example.css";
 
 import airportsData from "@/data/graphs/airports.json";
 
@@ -84,7 +85,7 @@ const LeafletLayer: FC = () => {
 // Main component
 export const BasicExample: FC = () => {
   return (
-    <SigmaContainer style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
+    <SigmaContainer className="basic-example-container" settings={SETTINGS}>
       <LoadGraph />
       <LeafletLayer />
     </SigmaContainer>

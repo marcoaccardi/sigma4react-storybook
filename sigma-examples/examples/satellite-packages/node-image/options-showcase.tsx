@@ -10,10 +10,11 @@
  */
 
 import type { FC } from "react";
+import "./options-showcase.css";
 
 export const OptionsShowcase: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="options-showcase-placeholder">
       <p>TODO: Implement Node Image Options Showcase example</p>
     </div>
   );

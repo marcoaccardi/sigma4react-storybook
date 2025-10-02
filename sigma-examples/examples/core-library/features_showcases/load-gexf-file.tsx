@@ -20,6 +20,7 @@ import { parse } from "graphology-gexf/browser";
 import { SigmaContainer } from "@/components/SigmaContainer";
 import arcticGexfText from "@/data/graphs/arctic.gexf?raw";
 import "@react-sigma/core/lib/style.css";
+import "./load-gexf-file.css";
 
 const SETTINGS = {
   minCameraRatio: 0.08,
@@ -43,7 +44,7 @@ const createGraphFromGexf = () => {
 
   // Copy edges, automatically deduplicating (simple graph ignores duplicate undirected edges)
   const addedEdges = new Set<string>();
-  multiGraph.forEachEdge((edge, attributes, source, target) => {
+  multiGraph.forEachEdge((_edge, attributes, source, target) => {
     // Create a canonical edge key (sorted to handle undirected duplicates)
     const edgeKey = [source, target].sort().join("-");
     if (!addedEdges.has(edgeKey)) {
@@ -75,57 +76,14 @@ const ZoomControls: FC = () => {
   };
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        top: "10px",
-        right: "10px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "8px",
-        background: "white",
-        padding: "10px",
-        borderRadius: "4px",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-      }}
-    >
-      <button
-        onClick={handleZoomIn}
-        style={{
-          padding: "8px 16px",
-          border: "1px solid #ddd",
-          borderRadius: "4px",
-          background: "white",
-          cursor: "pointer",
-          fontSize: "14px",
-        }}
-      >
+    <div className="load-gexf-zoom-controls">
+      <button onClick={handleZoomIn} className="load-gexf-zoom-button">
         +
       </button>
-      <button
-        onClick={handleZoomOut}
-        style={{
-          padding: "8px 16px",
-          border: "1px solid #ddd",
-          borderRadius: "4px",
-          background: "white",
-          cursor: "pointer",
-          fontSize: "14px",
-        }}
-      >
+      <button onClick={handleZoomOut} className="load-gexf-zoom-button">
         −
       </button>
-      <button
-        onClick={handleZoomReset}
-        style={{
-          padding: "8px 16px",
-          border: "1px solid #ddd",
-          borderRadius: "4px",
-          background: "white",
-          cursor: "pointer",
-          fontSize: "14px",
-        }}
-      >
+      <button onClick={handleZoomReset} className="load-gexf-zoom-button">
         ⟲
       </button>
     </div>
@@ -146,27 +104,8 @@ const LabelThresholdControl: FC = () => {
   };
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        bottom: "20px",
-        left: "20px",
-        background: "white",
-        padding: "12px 16px",
-        borderRadius: "4px",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-        minWidth: "250px",
-      }}
-    >
-      <label
-        style={{
-          display: "block",
-          marginBottom: "8px",
-          fontSize: "14px",
-          fontWeight: "500",
-          color: "#333",
-        }}
-      >
+    <div className="load-gexf-threshold-control">
+      <label className="load-gexf-threshold-label">
         Labels Threshold: {threshold}
       </label>
       <input
@@ -176,20 +115,9 @@ const LabelThresholdControl: FC = () => {
         step="0.5"
         value={threshold}
         onChange={handleThresholdChange}
-        style={{
-          width: "100%",
-          cursor: "pointer",
-        }}
+        className="load-gexf-threshold-slider"
       />
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          fontSize: "12px",
-          color: "#666",
-          marginTop: "4px",
-        }}
-      >
+      <div className="load-gexf-threshold-legend">
         <span>More labels</span>
         <span>Fewer labels</span>
       </div>
@@ -202,7 +130,7 @@ export const LoadGexfFile: FC = () => {
   const graph = useMemo(() => createGraphFromGexf(), []);
 
   return (
-    <div style={{ height: "100%", width: "100%", position: "relative" }}>
+    <div className="load-gexf-container">
       <SigmaContainer style={{ height: "100%", width: "100%" }} settings={SETTINGS} graph={graph}>
         <ZoomControls />
         <LabelThresholdControl />

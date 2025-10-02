@@ -10,10 +10,11 @@
  */
 
 import type { FC } from "react";
+import "./multiple-levels.css";
 
 export const MultipleLevels: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="multiple-levels-placeholder">
       <p>TODO: Implement Layer WebGL Multiple Levels example</p>
     </div>
   );

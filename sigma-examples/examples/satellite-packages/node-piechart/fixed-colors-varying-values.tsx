@@ -10,10 +10,11 @@
  */
 
 import type { FC } from "react";
+import "./fixed-colors-varying-values.css";
 
 export const FixedColorsVaryingValues: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="fixed-colors-varying-values-placeholder">
       <p>TODO: Implement Node Piechart Fixed Colors Varying Values example</p>
     </div>
   );

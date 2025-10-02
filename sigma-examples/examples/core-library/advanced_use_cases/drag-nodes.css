@@ -1,0 +1,43 @@
+.drag-nodes-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.drag-nodes-sigma-container {
+  flex: 1;
+  height: 100%;
+}
+
+.drag-nodes-instructions {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 320px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  z-index: 1000;
+}
+
+.drag-nodes-title {
+  margin: 0 0 16px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.drag-nodes-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.drag-nodes-list-item {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}

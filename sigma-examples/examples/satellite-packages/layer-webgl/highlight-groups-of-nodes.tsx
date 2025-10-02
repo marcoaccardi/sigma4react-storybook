@@ -10,10 +10,11 @@
  */
 
 import type { FC } from "react";
+import "./highlight-groups-of-nodes.css";
 
 export const HighlightGroupsOfNodes: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="highlight-groups-of-nodes-placeholder">
       <p>TODO: Implement Layer WebGL Highlight Groups of Nodes example</p>
     </div>
   );

@@ -10,10 +10,11 @@
  */
 
 import type { FC } from "react";
+import "./basic-example.css";
 
 export const BasicExample: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="basic-example-placeholder">
       <p>TODO: Implement Layer MapLibre Basic Example</p>
     </div>
   );

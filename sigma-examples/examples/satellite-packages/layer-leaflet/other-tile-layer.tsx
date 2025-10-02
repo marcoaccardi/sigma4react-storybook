@@ -10,10 +10,11 @@
  */
 
 import type { FC } from "react";
+import "./other-tile-layer.css";
 
 export const OtherTileLayer: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="other-tile-layer-placeholder">
       <p>TODO: Implement Layer Leaflet Other Tile Layer example</p>
     </div>
   );

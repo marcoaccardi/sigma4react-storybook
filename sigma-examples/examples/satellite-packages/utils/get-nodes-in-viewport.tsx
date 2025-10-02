@@ -10,10 +10,11 @@
  */
 
 import type { FC } from "react";
+import "./get-nodes-in-viewport.css";
 
 export const GetNodesInViewport: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="get-nodes-in-viewport-placeholder">
       <p>TODO: Implement Utils Get Nodes in Viewport example</p>
     </div>
   );

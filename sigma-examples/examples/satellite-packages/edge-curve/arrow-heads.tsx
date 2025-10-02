@@ -26,6 +26,7 @@ import {
   EdgeRectangleProgram,
 } from "sigma/rendering";
 import "@react-sigma/core/lib/style.css";
+import "./arrow-heads.css";
 
 // Arrow type options
 type ArrowType = "NoArrow" | "Arrow" | "DoubleArrow";
@@ -102,23 +103,11 @@ const ArrowTypeController: FC<{
   }, [arrowType, sigma]);
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        top: "10px",
-        right: "10px",
-        zIndex: 1000,
-      }}
-    >
+    <div className="arrow-heads-controls">
       <select
         value={arrowType}
         onChange={(e) => onArrowTypeChange(e.target.value as ArrowType)}
-        style={{
-          fontFamily: "sans-serif",
-          padding: "10px",
-          fontSize: "14px",
-          cursor: "pointer",
-        }}
+        className="arrow-heads-select"
       >
         <option value="NoArrow">No arrow</option>
         <option value="Arrow">Arrows</option>
@@ -133,8 +122,8 @@ export const ArrowHeads: FC = () => {
   const [arrowType, setArrowType] = useState<ArrowType>("Arrow");
 
   return (
-    <div style={{ position: "relative", height: "100%", width: "100%" }}>
-      <SigmaContainer style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
+    <div className="arrow-heads-wrapper">
+      <SigmaContainer className="arrow-heads-container" settings={SETTINGS}>
         <LoadGraph />
         <ArrowTypeController
           arrowType={arrowType}

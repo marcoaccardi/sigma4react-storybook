@@ -19,6 +19,7 @@ import Graph from "graphology";
 import ForceSupervisor from "graphology-layout-force/worker";
 import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
+import "./available-options.css";
 
 // Color constants
 const RED = "#FA4F40";
@@ -30,129 +31,6 @@ const SETTINGS = {
   renderEdgeLabels: true,
   renderLabels: true,
   allowInvalidContainer: true, // Prevents width errors during initial render
-};
-
-// Modern UI Styles
-const STYLES = {
-  panel: {
-    position: "absolute" as const,
-    top: "16px",
-    left: "16px",
-    maxWidth: "340px",
-    background: "rgba(255, 255, 255, 0.95)",
-    backdropFilter: "blur(10px)",
-    borderRadius: "12px",
-    boxShadow: "0 4px 24px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)",
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-    fontSize: "14px",
-    zIndex: 1000,
-    border: "1px solid rgba(0, 0, 0, 0.08)",
-  },
-  panelHeader: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: "16px 20px",
-    borderBottom: "1px solid rgba(0, 0, 0, 0.08)",
-    cursor: "pointer",
-    userSelect: "none" as const,
-  },
-  panelTitle: {
-    margin: 0,
-    fontSize: "16px",
-    fontWeight: 600,
-    color: "#1a1a1a",
-  },
-  panelContent: {
-    padding: "20px",
-  },
-  section: {
-    marginBottom: "20px",
-  },
-  sectionTitle: {
-    margin: "0 0 12px 0",
-    fontSize: "13px",
-    fontWeight: 600,
-    color: "#666",
-    textTransform: "uppercase" as const,
-    letterSpacing: "0.5px",
-  },
-  checkboxGrid: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: "10px",
-  },
-  checkboxLabel: {
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    cursor: "pointer",
-    padding: "8px",
-    borderRadius: "6px",
-    transition: "background 0.2s ease",
-  },
-  checkbox: {
-    width: "18px",
-    height: "18px",
-    cursor: "pointer",
-    accentColor: "#3b82f6",
-  },
-  inputGroup: {
-    marginBottom: "12px",
-  },
-  label: {
-    display: "block",
-    marginBottom: "6px",
-    fontSize: "13px",
-    fontWeight: 500,
-    color: "#444",
-  },
-  input: {
-    width: "100%",
-    padding: "10px 12px",
-    border: "1px solid rgba(0, 0, 0, 0.15)",
-    borderRadius: "6px",
-    fontSize: "14px",
-    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
-    boxSizing: "border-box" as const,
-  },
-  inputRow: {
-    display: "grid",
-    gridTemplateColumns: "1fr 1fr",
-    gap: "12px",
-  },
-  select: {
-    width: "100%",
-    padding: "10px 12px",
-    border: "1px solid rgba(0, 0, 0, 0.15)",
-    borderRadius: "6px",
-    fontSize: "14px",
-    backgroundColor: "white",
-    cursor: "pointer",
-    transition: "border-color 0.2s ease, box-shadow 0.2s ease",
-    boxSizing: "border-box" as const,
-  },
-  button: {
-    width: "100%",
-    padding: "14px 24px",
-    background: "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
-    color: "white",
-    border: "none",
-    borderRadius: "8px",
-    fontSize: "15px",
-    fontWeight: 600,
-    cursor: "pointer",
-    transition: "transform 0.2s ease, box-shadow 0.2s ease",
-    boxShadow: "0 4px 12px rgba(59, 130, 246, 0.3)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "8px",
-  },
-  chevron: {
-    transition: "transform 0.3s ease",
-    fontSize: "12px",
-  },
 };
 
 // Export options state type
@@ -300,36 +178,27 @@ const ExportControls: FC = () => {
   ];
 
   return (
-    <div style={STYLES.panel}>
+    <div className="available-options-panel">
       {/* Header with collapse button */}
-      <div style={STYLES.panelHeader} onClick={() => setIsExpanded(!isExpanded)}>
-        <h4 style={STYLES.panelTitle}>🎨 Export Controls</h4>
-        <span
-          style={{
-            ...STYLES.chevron,
-            transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
-          }}
-        >
+      <div className="available-options-panel-header" onClick={() => setIsExpanded(!isExpanded)}>
+        <h4 className="available-options-panel-title">🎨 Export Controls</h4>
+        <span className={`available-options-chevron ${isExpanded ? "expanded" : ""}`}>
           ▼
         </span>
       </div>
 
       {/* Collapsible content */}
       {isExpanded && (
-        <div style={STYLES.panelContent}>
+        <div className="available-options-panel-content">
           {/* Layers Section */}
-          <div style={STYLES.section}>
-            <div style={STYLES.sectionTitle}>Layers to Export</div>
-            <div style={STYLES.checkboxGrid}>
+          <div className="available-options-section">
+            <div className="available-options-section-title">Layers to Export</div>
+            <div className="available-options-checkbox-grid">
               {layerOptions.map(({ key, label }) => (
                 <label
                   key={key}
                   htmlFor={`layer-${key}`}
-                  style={STYLES.checkboxLabel}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.background = "rgba(59, 130, 246, 0.08)")
-                  }
-                  onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+                  className="available-options-checkbox-label"
                 >
                   <input
                     type="checkbox"
@@ -341,7 +210,7 @@ const ExportControls: FC = () => {
                         layers: { ...options.layers, [key]: e.target.checked },
                       })
                     }
-                    style={STYLES.checkbox}
+                    className="available-options-checkbox"
                   />
                   <span>{label}</span>
                 </label>
@@ -350,11 +219,11 @@ const ExportControls: FC = () => {
           </div>
 
           {/* Dimensions Section */}
-          <div style={STYLES.section}>
-            <div style={STYLES.sectionTitle}>Dimensions</div>
-            <div style={STYLES.inputRow}>
+          <div className="available-options-section">
+            <div className="available-options-section-title">Dimensions</div>
+            <div className="available-options-input-row">
               <div>
-                <label htmlFor="width" style={STYLES.label}>
+                <label htmlFor="width" className="available-options-label">
                   Width
                 </label>
                 <input
@@ -363,19 +232,11 @@ const ExportControls: FC = () => {
                   placeholder="Auto"
                   value={options.width}
                   onChange={(e) => setOptions({ ...options, width: e.target.value })}
-                  style={STYLES.input}
-                  onFocus={(e) => {
-                    e.target.style.borderColor = "#3b82f6";
-                    e.target.style.boxShadow = "0 0 0 3px rgba(59, 130, 246, 0.1)";
-                  }}
-                  onBlur={(e) => {
-                    e.target.style.borderColor = "rgba(0, 0, 0, 0.15)";
-                    e.target.style.boxShadow = "none";
-                  }}
+                  className="available-options-input"
                 />
               </div>
               <div>
-                <label htmlFor="height" style={STYLES.label}>
+                <label htmlFor="height" className="available-options-label">
                   Height
                 </label>
                 <input
@@ -384,25 +245,17 @@ const ExportControls: FC = () => {
                   placeholder="Auto"
                   value={options.height}
                   onChange={(e) => setOptions({ ...options, height: e.target.value })}
-                  style={STYLES.input}
-                  onFocus={(e) => {
-                    e.target.style.borderColor = "#3b82f6";
-                    e.target.style.boxShadow = "0 0 0 3px rgba(59, 130, 246, 0.1)";
-                  }}
-                  onBlur={(e) => {
-                    e.target.style.borderColor = "rgba(0, 0, 0, 0.15)";
-                    e.target.style.boxShadow = "none";
-                  }}
+                  className="available-options-input"
                 />
               </div>
             </div>
           </div>
 
           {/* File Settings Section */}
-          <div style={STYLES.section}>
-            <div style={STYLES.sectionTitle}>File Settings</div>
-            <div style={STYLES.inputGroup}>
-              <label htmlFor="filename" style={STYLES.label}>
+          <div className="available-options-section">
+            <div className="available-options-section-title">File Settings</div>
+            <div className="available-options-input-group">
+              <label htmlFor="filename" className="available-options-label">
                 Filename
               </label>
               <input
@@ -410,20 +263,12 @@ const ExportControls: FC = () => {
                 id="filename"
                 value={options.filename}
                 onChange={(e) => setOptions({ ...options, filename: e.target.value })}
-                style={STYLES.input}
-                onFocus={(e) => {
-                  e.target.style.borderColor = "#3b82f6";
-                  e.target.style.boxShadow = "0 0 0 3px rgba(59, 130, 246, 0.1)";
-                }}
-                onBlur={(e) => {
-                  e.target.style.borderColor = "rgba(0, 0, 0, 0.15)";
-                  e.target.style.boxShadow = "none";
-                }}
+                className="available-options-input"
               />
             </div>
-            <div style={STYLES.inputRow}>
+            <div className="available-options-input-row">
               <div>
-                <label htmlFor="format" style={STYLES.label}>
+                <label htmlFor="format" className="available-options-label">
                   Format
                 </label>
                 <select
@@ -432,22 +277,14 @@ const ExportControls: FC = () => {
                   onChange={(e) =>
                     setOptions({ ...options, format: e.target.value as "png" | "jpeg" })
                   }
-                  style={STYLES.select}
-                  onFocus={(e) => {
-                    e.target.style.borderColor = "#3b82f6";
-                    e.target.style.boxShadow = "0 0 0 3px rgba(59, 130, 246, 0.1)";
-                  }}
-                  onBlur={(e) => {
-                    e.target.style.borderColor = "rgba(0, 0, 0, 0.15)";
-                    e.target.style.boxShadow = "none";
-                  }}
+                  className="available-options-select"
                 >
                   <option value="png">PNG</option>
                   <option value="jpeg">JPEG</option>
                 </select>
               </div>
               <div>
-                <label htmlFor="backgroundColor" style={STYLES.label}>
+                <label htmlFor="backgroundColor" className="available-options-label">
                   Background
                 </label>
                 <input
@@ -457,24 +294,19 @@ const ExportControls: FC = () => {
                   onChange={(e) =>
                     setOptions({ ...options, backgroundColor: e.target.value })
                   }
-                  style={{ ...STYLES.input, height: "42px", cursor: "pointer" }}
+                  className="available-options-input"
+                  style={{ height: "42px", cursor: "pointer" }}
                 />
               </div>
             </div>
           </div>
 
           {/* Camera Section */}
-          <div style={STYLES.section}>
+          <div className="available-options-section">
             <label
               htmlFor="resetCameraState"
-              style={{
-                ...STYLES.checkboxLabel,
-                marginBottom: 0,
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.background = "rgba(59, 130, 246, 0.08)")
-              }
-              onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+              className="available-options-checkbox-label"
+              style={{ marginBottom: 0 }}
             >
               <input
                 type="checkbox"
@@ -483,7 +315,7 @@ const ExportControls: FC = () => {
                 onChange={(e) =>
                   setOptions({ ...options, resetCameraState: e.target.checked })
                 }
-                style={STYLES.checkbox}
+                className="available-options-checkbox"
               />
               <span>Reset camera state</span>
             </label>
@@ -493,21 +325,7 @@ const ExportControls: FC = () => {
           <button
             type="button"
             onClick={handleExport}
-            style={STYLES.button}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "scale(1.02)";
-              e.currentTarget.style.boxShadow = "0 6px 16px rgba(59, 130, 246, 0.4)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "scale(1)";
-              e.currentTarget.style.boxShadow = "0 4px 12px rgba(59, 130, 246, 0.3)";
-            }}
-            onMouseDown={(e) => {
-              e.currentTarget.style.transform = "scale(0.98)";
-            }}
-            onMouseUp={(e) => {
-              e.currentTarget.style.transform = "scale(1.02)";
-            }}
+            className="available-options-button"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />

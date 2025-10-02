@@ -20,6 +20,7 @@ import { parse } from "graphology-gexf/browser";
 import { SigmaContainer } from "@/components/SigmaContainer";
 import arcticGexfText from "@/data/graphs/arctic.gexf?raw";
 import "@react-sigma/core/lib/style.css";
+import "./camera-settings.css";
 
 const SETTINGS = {
   renderLabels: true,
@@ -103,77 +104,64 @@ const CameraControls: FC = () => {
   };
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        top: "20px",
-        right: "20px",
-        background: "white",
-        padding: "20px",
-        borderRadius: "8px",
-        boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
-        minWidth: "320px",
-        maxWidth: "360px",
-        fontFamily: "system-ui, -apple-system, sans-serif",
-      }}
-    >
+    <div className="camera-settings-panel">
       {/* Header */}
-      <div style={{ marginBottom: "20px" }}>
-        <h3 style={{ margin: "0 0 4px 0", fontSize: "18px", fontWeight: "600", color: "#111" }}>
+      <div className="camera-settings-header">
+        <h3 className="camera-settings-title">
           Camera Settings
         </h3>
-        <p style={{ margin: 0, fontSize: "13px", color: "#666" }}>
+        <p className="camera-settings-subtitle">
           Adjust camera behavior and boundaries
         </p>
       </div>
 
       {/* Interactions Section */}
-      <div style={{ marginBottom: "24px" }}>
-        <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "#333" }}>
+      <div className="camera-settings-section">
+        <div className="camera-settings-section-title">
           🎮 Interactions
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-          <label style={{ display: "flex", alignItems: "center", cursor: "pointer", fontSize: "14px" }}>
+        <div className="camera-settings-checkboxes">
+          <label className="camera-settings-checkbox-label">
             <input
               type="checkbox"
               checked={enablePanning}
               onChange={(e) => setEnablePanning(e.target.checked)}
-              style={{ marginRight: "8px", cursor: "pointer" }}
+              className="camera-settings-checkbox"
             />
             Enable panning
           </label>
-          <label style={{ display: "flex", alignItems: "center", cursor: "pointer", fontSize: "14px" }}>
+          <label className="camera-settings-checkbox-label">
             <input
               type="checkbox"
               checked={enableZooming}
               onChange={(e) => setEnableZooming(e.target.checked)}
-              style={{ marginRight: "8px", cursor: "pointer" }}
+              className="camera-settings-checkbox"
             />
             Enable zooming
           </label>
-          <label style={{ display: "flex", alignItems: "center", cursor: "pointer", fontSize: "14px" }}>
+          <label className="camera-settings-checkbox-label">
             <input
               type="checkbox"
               checked={enableRotation}
               onChange={(e) => setEnableRotation(e.target.checked)}
-              style={{ marginRight: "8px", cursor: "pointer" }}
+              className="camera-settings-checkbox"
             />
             Enable camera rotations
-            <span style={{ fontSize: "12px", color: "#999", marginLeft: "4px" }}>(multitouch only)</span>
+            <span className="camera-settings-hint">(multitouch only)</span>
           </label>
         </div>
       </div>
 
       {/* Camera Zoom Section */}
-      <div style={{ marginBottom: "24px" }}>
-        <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "#333" }}>
+      <div className="camera-settings-section">
+        <div className="camera-settings-section-title">
           🔍 Camera Zoom
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          <div>
-            <label style={{ display: "block", fontSize: "13px", marginBottom: "4px", color: "#555" }}>
+        <div className="camera-settings-inputs">
+          <div className="camera-settings-input-group">
+            <label>
               Minimum camera zoom ratio
-              <span style={{ fontSize: "11px", color: "#999", marginLeft: "4px" }}>(leave empty for no limit)</span>
+              <span className="camera-settings-hint">(leave empty for no limit)</span>
             </label>
             <input
               type="text"
@@ -181,22 +169,13 @@ const CameraControls: FC = () => {
               onChange={(e) => setMinRatio(e.target.value)}
               disabled={!enableZooming}
               placeholder="0.08"
-              style={{
-                width: "100%",
-                padding: "8px 10px",
-                fontSize: "14px",
-                border: "1px solid #ddd",
-                borderRadius: "4px",
-                boxSizing: "border-box",
-                opacity: enableZooming ? 1 : 0.5,
-                cursor: enableZooming ? "text" : "not-allowed",
-              }}
+              className="camera-settings-input"
             />
           </div>
-          <div>
-            <label style={{ display: "block", fontSize: "13px", marginBottom: "4px", color: "#555" }}>
+          <div className="camera-settings-input-group">
+            <label>
               Maximum camera zoom ratio
-              <span style={{ fontSize: "11px", color: "#999", marginLeft: "4px" }}>(leave empty for no limit)</span>
+              <span className="camera-settings-hint">(leave empty for no limit)</span>
             </label>
             <input
               type="text"
@@ -204,43 +183,31 @@ const CameraControls: FC = () => {
               onChange={(e) => setMaxRatio(e.target.value)}
               disabled={!enableZooming}
               placeholder="3"
-              style={{
-                width: "100%",
-                padding: "8px 10px",
-                fontSize: "14px",
-                border: "1px solid #ddd",
-                borderRadius: "4px",
-                boxSizing: "border-box",
-                opacity: enableZooming ? 1 : 0.5,
-                cursor: enableZooming ? "text" : "not-allowed",
-              }}
+              className="camera-settings-input"
             />
           </div>
         </div>
       </div>
 
       {/* Pan Boundaries Section */}
-      <div style={{ marginBottom: "24px" }}>
-        <div style={{ fontSize: "14px", fontWeight: "600", marginBottom: "12px", color: "#333" }}>
+      <div className="camera-settings-section">
+        <div className="camera-settings-section-title">
           📍 Pan Boundaries
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          <label style={{ display: "flex", alignItems: "center", cursor: "pointer", fontSize: "14px" }}>
+        <div className="camera-settings-inputs">
+          <label className="camera-settings-checkbox-label">
             <input
               type="checkbox"
               checked={boundCamera}
               onChange={(e) => setBoundCamera(e.target.checked)}
               disabled={!enablePanning}
-              style={{
-                marginRight: "8px",
-                cursor: enablePanning ? "pointer" : "not-allowed",
-                opacity: enablePanning ? 1 : 0.5,
-              }}
+              className="camera-settings-checkbox"
+              style={{ opacity: enablePanning ? 1 : 0.5 }}
             />
             Bound camera
           </label>
-          <div>
-            <label style={{ display: "block", fontSize: "13px", marginBottom: "4px", color: "#555" }}>
+          <div className="camera-settings-input-group">
+            <label>
               Tolerance (in pixels)
             </label>
             <input
@@ -249,16 +216,7 @@ const CameraControls: FC = () => {
               onChange={(e) => setTolerance(e.target.value)}
               disabled={!enablePanning || !boundCamera}
               placeholder="500"
-              style={{
-                width: "100%",
-                padding: "8px 10px",
-                fontSize: "14px",
-                border: "1px solid #ddd",
-                borderRadius: "4px",
-                boxSizing: "border-box",
-                opacity: enablePanning && boundCamera ? 1 : 0.5,
-                cursor: enablePanning && boundCamera ? "text" : "not-allowed",
-              }}
+              className="camera-settings-input"
             />
           </div>
         </div>
@@ -267,26 +225,7 @@ const CameraControls: FC = () => {
       {/* Reset Button */}
       <button
         onClick={handleResetCamera}
-        style={{
-          width: "100%",
-          padding: "12px",
-          fontSize: "14px",
-          fontWeight: "600",
-          color: "white",
-          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-          border: "none",
-          borderRadius: "6px",
-          cursor: "pointer",
-          transition: "transform 0.2s, box-shadow 0.2s",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = "translateY(-1px)";
-          e.currentTarget.style.boxShadow = "0 4px 12px rgba(102, 126, 234, 0.4)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = "translateY(0)";
-          e.currentTarget.style.boxShadow = "none";
-        }}
+        className="camera-settings-button"
       >
         🎯 Reset Camera Position
       </button>

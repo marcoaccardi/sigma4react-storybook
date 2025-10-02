@@ -19,6 +19,7 @@ import chroma from "chroma-js";
 import { v4 as uuid } from "uuid";
 import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
+import "./drag-nodes.css";
 
 // Settings (immutable)
 const SETTINGS = {
@@ -173,69 +174,27 @@ const InteractionHandler: FC = () => {
 // Instructions Panel
 const Instructions: FC = () => {
   return (
-    <div style={styles.instructions}>
-      <h3 style={styles.title}>Drag & Create Nodes</h3>
-      <ul style={styles.list}>
-        <li style={styles.listItem}>
+    <div className="drag-nodes-instructions">
+      <h3 className="drag-nodes-title">Drag & Create Nodes</h3>
+      <ul className="drag-nodes-list">
+        <li className="drag-nodes-list-item">
           <strong>Drag:</strong> Click and drag any node to move it
         </li>
-        <li style={styles.listItem}>
+        <li className="drag-nodes-list-item">
           <strong>Create:</strong> Click on empty space to create a new node
         </li>
-        <li style={styles.listItem}>New nodes automatically connect to the 2 closest nodes</li>
-        <li style={styles.listItem}>Force layout keeps the graph organized</li>
+        <li className="drag-nodes-list-item">New nodes automatically connect to the 2 closest nodes</li>
+        <li className="drag-nodes-list-item">Force layout keeps the graph organized</li>
       </ul>
     </div>
   );
 };
 
-// Styles
-const styles: Record<string, React.CSSProperties> = {
-  container: {
-    display: "flex",
-    height: "100%",
-    width: "100%",
-    position: "relative",
-  },
-  sigmaContainer: {
-    flex: 1,
-    height: "100%",
-  },
-  instructions: {
-    position: "absolute",
-    top: "20px",
-    left: "20px",
-    backgroundColor: "white",
-    padding: "20px",
-    borderRadius: "12px",
-    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
-    maxWidth: "320px",
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-    zIndex: 1000,
-  },
-  title: {
-    margin: "0 0 16px 0",
-    fontSize: "18px",
-    fontWeight: 600,
-    color: "#1a1a1a",
-  },
-  list: {
-    margin: 0,
-    paddingLeft: "20px",
-  },
-  listItem: {
-    fontSize: "14px",
-    color: "#555",
-    marginBottom: "8px",
-    lineHeight: "1.5",
-  },
-};
-
 // Main Component
 export const DragNodes: FC = () => {
   return (
-    <div style={styles.container}>
-      <SigmaContainer style={styles.sigmaContainer} settings={SETTINGS}>
+    <div className="drag-nodes-container">
+      <SigmaContainer className="drag-nodes-sigma-container" settings={SETTINGS}>
         <LoadGraph />
         <ForceLayout />
         <InteractionHandler />

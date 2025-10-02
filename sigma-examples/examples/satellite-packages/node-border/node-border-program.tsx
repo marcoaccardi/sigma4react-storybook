@@ -10,10 +10,11 @@
  */
 
 import type { FC } from "react";
+import "./node-border-program.css";
 
 export const NodeBorderProgram: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="node-border-program-placeholder">
       <p>TODO: Implement Node Border Program example</p>
     </div>
   );

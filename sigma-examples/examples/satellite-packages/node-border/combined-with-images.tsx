@@ -10,10 +10,11 @@
  */
 
 import type { FC } from "react";
+import "./combined-with-images.css";
 
 export const CombinedWithImages: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="combined-with-images-placeholder">
       <p>TODO: Implement Node Border Combined with Images example</p>
     </div>
   );

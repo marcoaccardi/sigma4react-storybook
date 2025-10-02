@@ -18,6 +18,7 @@ import { MultiGraph } from "graphology";
 import { DEFAULT_EDGE_CURVATURE, EdgeCurvedArrowProgram, indexParallelEdgesIndex } from "@sigma/edge-curve";
 import { EdgeArrowProgram } from "sigma/rendering";
 import "@react-sigma/core/lib/style.css";
+import "./parallel-edges.css";
 
 // Curvature calculation for parallel edges
 function getCurvature(index: number, maxIndex: number): number {
@@ -137,7 +138,7 @@ export const ParallelEdges: FC = () => {
   }, []);
 
   return (
-    <SigmaContainer style={{ height: "100%", width: "100%" }} settings={SETTINGS} graph={graph}>
+    <SigmaContainer className="parallel-edges-container" settings={SETTINGS} graph={graph}>
     </SigmaContainer>
   );
 };

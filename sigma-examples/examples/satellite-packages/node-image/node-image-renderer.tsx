@@ -10,10 +10,11 @@
  */
 
 import type { FC } from "react";
+import "./node-image-renderer.css";
 
 export const NodeImageRenderer: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="node-image-renderer-placeholder">
       <p>TODO: Implement Node Image Renderer example</p>
     </div>
   );

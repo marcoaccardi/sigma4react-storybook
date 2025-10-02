@@ -1,0 +1,120 @@
+/* Shadow DOM Events Example Styles */
+
+.shadow-dom-log-panel {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 400px;
+  max-height: calc(100vh - 100px);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  pointer-events: auto;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.shadow-dom-log-header {
+  padding: 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  font-size: 16px;
+  color: #111;
+}
+
+.shadow-dom-log-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.shadow-dom-log-item {
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 4px;
+  font-size: 13px;
+  word-break: break-word;
+}
+
+.shadow-dom-log-item.node {
+  border-left: 3px solid #3b82f6;
+}
+
+.shadow-dom-log-item.edge {
+  border-left: 3px solid #10b981;
+}
+
+.shadow-dom-log-item.stage {
+  border-left: 3px solid #6b7280;
+}
+
+.shadow-dom-log-message {
+  color: #333;
+  line-height: 1.4;
+}
+
+.shadow-dom-log-timestamp {
+  color: #999;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.shadow-dom-toggle-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  z-index: 20;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  transition: transform 0.2s;
+}
+
+.shadow-dom-toggle-button:hover {
+  transform: translateY(-2px);
+}
+
+.shadow-dom-toggle-button:active {
+  transform: translateY(0);
+}
+
+.shadow-dom-info-panel {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  max-width: 320px;
+  font-size: 13px;
+  color: #333;
+  z-index: 10;
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+}
+
+.shadow-dom-info-title {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #111;
+}
+
+.shadow-dom-info-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #666;
+}

@@ -1,0 +1,121 @@
+/* Camera Settings Example Styles */
+
+.camera-settings-panel {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  min-width: 320px;
+  max-width: 360px;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.camera-settings-header {
+  margin-bottom: 20px;
+}
+
+.camera-settings-title {
+  margin: 0 0 4px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+}
+
+.camera-settings-subtitle {
+  margin: 0;
+  font-size: 13px;
+  color: #666;
+}
+
+.camera-settings-section {
+  margin-bottom: 24px;
+}
+
+.camera-settings-section-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.camera-settings-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.camera-settings-checkbox-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.camera-settings-checkbox {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.camera-settings-hint {
+  font-size: 12px;
+  color: #999;
+  margin-left: 4px;
+}
+
+.camera-settings-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.camera-settings-input-group label {
+  display: block;
+  font-size: 13px;
+  margin-bottom: 4px;
+  color: #555;
+}
+
+.camera-settings-input {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.camera-settings-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+.camera-settings-input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.camera-settings-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.camera-settings-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.camera-settings-button:active {
+  transform: translateY(0);
+}

@@ -10,10 +10,11 @@
  */
 
 import type { FC } from "react";
+import "./node-pictogram-renderer.css";
 
 export const NodePictogramRenderer: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="node-pictogram-renderer-placeholder">
       <p>TODO: Implement Node Pictogram Renderer example</p>
     </div>
   );

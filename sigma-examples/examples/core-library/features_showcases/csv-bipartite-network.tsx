@@ -26,6 +26,7 @@ import circular from "graphology-layout/circular";
 import Papa from "papaparse";
 import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
+import "./csv-bipartite-network.css";
 import csvDataPath from "@/data/csv/institutions-subjects.csv?url";
 
 // Settings (immutable)
@@ -177,37 +178,11 @@ const LoadCsvGraph: FC<{
 // Loading spinner component
 const LoadingSpinner: FC = () => {
   return (
-    <div
-      style={{
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: "16px",
-      }}
-    >
-      <div
-        style={{
-          width: "50px",
-          height: "50px",
-          border: "5px solid #f3f3f3",
-          borderTop: "5px solid #3498db",
-          borderRadius: "50%",
-          animation: "spin 1s linear infinite",
-        }}
-      />
-      <div style={{ color: "#333", fontSize: "14px", fontWeight: "500" }}>
+    <div className="csv-loading-spinner-container">
+      <div className="csv-loading-spinner" />
+      <div className="csv-loading-text">
         Loading CSV data...
       </div>
-      <style>{`
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-      `}</style>
     </div>
   );
 };
@@ -215,61 +190,25 @@ const LoadingSpinner: FC = () => {
 // Legend component
 const Legend: FC = () => {
   return (
-    <div
-      style={{
-        position: "absolute",
-        top: "20px",
-        right: "20px",
-        background: "rgba(26, 26, 26, 0.95)",
-        borderRadius: "8px",
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)",
-        padding: "16px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "12px",
-        minWidth: "200px",
-      }}
-    >
-      <div
-        style={{
-          color: "#fff",
-          fontWeight: "600",
-          fontSize: "14px",
-          marginBottom: "4px",
-        }}
-      >
+    <div className="csv-legend-panel">
+      <div className="csv-legend-title">
         Node Types
       </div>
-      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+      <div className="csv-legend-item">
         <div
-          style={{
-            width: "16px",
-            height: "16px",
-            borderRadius: "50%",
-            background: COLORS.institution,
-          }}
+          className="csv-legend-dot"
+          style={{ background: COLORS.institution }}
         />
-        <span style={{ color: "#fff", fontSize: "13px" }}>Institutions</span>
+        <span className="csv-legend-label">Institutions</span>
       </div>
-      <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+      <div className="csv-legend-item">
         <div
-          style={{
-            width: "16px",
-            height: "16px",
-            borderRadius: "50%",
-            background: COLORS.subject,
-          }}
+          className="csv-legend-dot"
+          style={{ background: COLORS.subject }}
         />
-        <span style={{ color: "#fff", fontSize: "13px" }}>Subjects</span>
+        <span className="csv-legend-label">Subjects</span>
       </div>
-      <div
-        style={{
-          fontSize: "11px",
-          color: "#9ca3af",
-          marginTop: "4px",
-          lineHeight: "1.4",
-        }}
-      >
+      <div className="csv-legend-info">
         Node size = number of connections
       </div>
     </div>

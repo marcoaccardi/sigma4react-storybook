@@ -10,10 +10,11 @@
  */
 
 import type { FC } from "react";
+import "./node-pictogram-renderer-with-background-colors.css";
 
 export const NodePictogramRendererWithBackgroundColors: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="node-pictogram-renderer-with-background-colors-placeholder">
       <p>TODO: Implement Node Pictogram Renderer with Background Colors example</p>
     </div>
   );

@@ -23,6 +23,7 @@ import { SigmaContainer } from "@/components/SigmaContainer";
 import Graph from "graphology";
 import EdgeCurveProgram from "@sigma/edge-curve";
 import "@react-sigma/core/lib/style.css";
+import "./basic-example.css";
 
 // Import Les Misérables data
 import lesMiserablesData from "@/data/graphs/les-miserables.json";
@@ -57,11 +58,8 @@ const LoadGraph: FC = () => {
 // Main component
 export const BasicExample: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%" }}>
-      <SigmaContainer
-        style={{ height: "100%", width: "100%" }}
-        settings={SETTINGS}
-      >
+    <div className="basic-example-wrapper">
+      <SigmaContainer className="basic-example-container" settings={SETTINGS}>
         <LoadGraph />
       </SigmaContainer>
     </div>

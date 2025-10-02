@@ -24,6 +24,7 @@ import { useLayoutCircular } from "@react-sigma/layout-circular";
 import { animateNodes } from "sigma/utils";
 import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
+import "./layouts.css";
 import lesMiserablesData from "@/data/graphs/les-miserables.json";
 
 // Track if graph has been loaded (persists across StrictMode remounts)
@@ -168,61 +169,19 @@ const LayoutControlPanel: FC<{
   isFA2Running: boolean;
 }> = ({ onForceAtlas2, onCircular, onRandom, isFA2Running }) => {
   return (
-    <div
-      style={{
-        position: "absolute",
-        top: "20px",
-        left: "20px",
-        background: "rgba(26, 26, 26, 0.95)",
-        borderRadius: "8px",
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)",
-        padding: "16px",
-        display: "flex",
-        flexDirection: "column",
-        gap: "12px",
-        minWidth: "200px",
-      }}
-    >
+    <div className="layouts-control-panel">
       {/* Header */}
-      <div
-        style={{
-          color: "#fff",
-          fontWeight: "600",
-          fontSize: "14px",
-          marginBottom: "4px",
-        }}
-      >
+      <div className="layouts-panel-header">
         Layout Controls
       </div>
 
       {/* ForceAtlas2 Button */}
       <button
         onClick={onForceAtlas2}
-        style={{
-          padding: "10px 16px",
-          background: isFA2Running ? "#22c55e" : "#374151",
-          border: "none",
-          borderRadius: "6px",
-          color: "#fff",
-          fontSize: "13px",
-          fontWeight: "500",
-          cursor: "pointer",
-          transition: "all 0.2s",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = "translateY(-1px)";
-          e.currentTarget.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = "translateY(0)";
-          e.currentTarget.style.boxShadow = "none";
-        }}
+        className={`layouts-button layouts-button-fa2 ${isFA2Running ? "running" : ""}`}
       >
         <span>ForceAtlas2</span>
-        <span style={{ fontSize: "10px", opacity: 0.8 }}>
+        <span className="layouts-button-fa2-status">
           {isFA2Running ? "■ Stop" : "▶ Start"}
         </span>
       </button>
@@ -230,25 +189,7 @@ const LayoutControlPanel: FC<{
       {/* Circular Button */}
       <button
         onClick={onCircular}
-        style={{
-          padding: "10px 16px",
-          background: "#3b82f6",
-          border: "none",
-          borderRadius: "6px",
-          color: "#fff",
-          fontSize: "13px",
-          fontWeight: "500",
-          cursor: "pointer",
-          transition: "all 0.2s",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = "translateY(-1px)";
-          e.currentTarget.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = "translateY(0)";
-          e.currentTarget.style.boxShadow = "none";
-        }}
+        className="layouts-button layouts-button-circular"
       >
         Circular Layout
       </button>
@@ -256,38 +197,13 @@ const LayoutControlPanel: FC<{
       {/* Random Button */}
       <button
         onClick={onRandom}
-        style={{
-          padding: "10px 16px",
-          background: "#8b5cf6",
-          border: "none",
-          borderRadius: "6px",
-          color: "#fff",
-          fontSize: "13px",
-          fontWeight: "500",
-          cursor: "pointer",
-          transition: "all 0.2s",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = "translateY(-1px)";
-          e.currentTarget.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.2)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = "translateY(0)";
-          e.currentTarget.style.boxShadow = "none";
-        }}
+        className="layouts-button layouts-button-random"
       >
         Random Layout
       </button>
 
       {/* Info text */}
-      <div
-        style={{
-          fontSize: "11px",
-          color: "#9ca3af",
-          marginTop: "4px",
-          lineHeight: "1.4",
-        }}
-      >
+      <div className="layouts-info-text">
         {isFA2Running
           ? "ForceAtlas2 is running..."
           : "Click a button to apply a layout"}

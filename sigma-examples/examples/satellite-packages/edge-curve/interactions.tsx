@@ -18,6 +18,7 @@ import EdgeCurveProgram from "@sigma/edge-curve";
 import Graph from "graphology";
 import type { EdgeDisplayData, NodeDisplayData } from "sigma/types";
 import "@react-sigma/core/lib/style.css";
+import "./interactions.css";
 
 import data from "@/data/graphs/les-miserables.json";
 
@@ -111,7 +112,7 @@ const EdgeHoverHandler: FC = () => {
 // Main component
 export const Interactions: FC = () => {
   return (
-    <SigmaContainer style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
+    <SigmaContainer className="interactions-container" settings={SETTINGS}>
       <LoadGraph />
       <EdgeHoverHandler />
     </SigmaContainer>

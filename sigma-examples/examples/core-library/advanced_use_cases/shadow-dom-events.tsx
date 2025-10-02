@@ -23,6 +23,7 @@ import Graph from "graphology";
 import type { SerializedGraph } from "graphology-types";
 import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
+import "./shadow-dom-events.css";
 import lesMiserablesData from "@/data/graphs/les-miserables.json";
 
 const SETTINGS = {
@@ -279,75 +280,22 @@ const EventLogPanel: FC<{ logs: EventLog[]; visible: boolean }> = ({ logs, visib
 
   if (!visible) return null;
 
-  const getCategoryColor = (category: "node" | "edge" | "stage") => {
-    switch (category) {
-      case "node":
-        return "#3b82f6"; // blue
-      case "edge":
-        return "#10b981"; // green
-      case "stage":
-        return "#6b7280"; // gray
-    }
-  };
-
   return (
-    <div
-      style={{
-        position: "absolute",
-        top: "20px",
-        right: "20px",
-        width: "400px",
-        maxHeight: "calc(100vh - 100px)",
-        background: "rgba(255, 255, 255, 0.95)",
-        backdropFilter: "blur(10px)",
-        borderRadius: "8px",
-        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
-        display: "flex",
-        flexDirection: "column",
-        zIndex: 10, // Overlays the graph (matches vanilla's log panel)
-        pointerEvents: "auto", // Allow interactions with log panel
-        fontFamily: "system-ui, -apple-system, sans-serif",
-      }}
-    >
+    <div className="shadow-dom-log-panel">
       {/* Header */}
-      <div
-        style={{
-          padding: "16px",
-          borderBottom: "1px solid rgba(0, 0, 0, 0.1)",
-          fontWeight: "600",
-          fontSize: "16px",
-          color: "#111",
-        }}
-      >
+      <div className="shadow-dom-log-header">
         Event Log ({logs.length})
       </div>
 
       {/* Log container - scrollable */}
-      <div
-        ref={logContainerRef}
-        style={{
-          flex: 1,
-          overflowY: "auto",
-          padding: "12px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "6px",
-        }}
-      >
+      <div ref={logContainerRef} className="shadow-dom-log-list">
         {logs.map((log) => (
           <div
             key={log.id}
-            style={{
-              padding: "8px 12px",
-              background: "rgba(0, 0, 0, 0.03)",
-              borderRadius: "4px",
-              fontSize: "13px",
-              borderLeft: `3px solid ${getCategoryColor(log.category)}`,
-              wordBreak: "break-word",
-            }}
+            className={`shadow-dom-log-item ${log.category}`}
           >
-            <div style={{ color: "#333", lineHeight: "1.4" }}>{log.message}</div>
-            <div style={{ color: "#999", fontSize: "11px", marginTop: "4px" }}>
+            <div className="shadow-dom-log-message">{log.message}</div>
+            <div className="shadow-dom-log-timestamp">
               {new Date(log.timestamp).toLocaleTimeString()}
             </div>
           </div>
@@ -394,58 +342,20 @@ export const ShadowDOMEvents: FC = () => {
       {/* Toggle button */}
       <button
         onClick={() => setShowLogs(!showLogs)}
-        style={{
-          position: "absolute",
-          bottom: "20px",
-          right: "20px",
-          padding: "12px 20px",
-          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-          color: "white",
-          border: "none",
-          borderRadius: "6px",
-          cursor: "pointer",
-          fontWeight: "600",
-          fontSize: "14px",
-          zIndex: 20, // Above log panel
-          boxShadow: "0 4px 12px rgba(102, 126, 234, 0.4)",
-          transition: "transform 0.2s",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = "translateY(-2px)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = "translateY(0)";
-        }}
+        className="shadow-dom-toggle-button"
       >
         {showLogs ? "Hide" : "Show"} Event Log
       </button>
 
       {/* Info panel explaining the example */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: "20px",
-          left: "20px",
-          background: "rgba(255, 255, 255, 0.95)",
-          backdropFilter: "blur(10px)",
-          padding: "16px",
-          borderRadius: "8px",
-          boxShadow: "0 4px 16px rgba(0, 0, 0, 0.15)",
-          maxWidth: "320px",
-          fontSize: "13px",
-          color: "#333",
-          zIndex: 10,
-          fontFamily: "system-ui, -apple-system, sans-serif",
-          lineHeight: "1.5",
-        }}
-      >
-        <div style={{ fontWeight: "600", marginBottom: "8px", color: "#111" }}>💡 About This Example</div>
+      <div className="shadow-dom-info-panel">
+        <div className="shadow-dom-info-title">💡 About This Example</div>
         <div>
           This demonstrates <strong>comprehensive event handling</strong> with all 19 Sigma event types. The vanilla
           version uses Shadow DOM; this React version achieves the same result using standard React patterns with
           z-index management.
         </div>
-        <div style={{ marginTop: "8px", fontSize: "12px", color: "#666" }}>
+        <div className="shadow-dom-info-hint">
           Try: Click nodes/edges, right-click, double-click, scroll, hover edges (they turn red!)
         </div>
       </div>

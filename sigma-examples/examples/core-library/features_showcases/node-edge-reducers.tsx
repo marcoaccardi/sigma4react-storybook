@@ -18,6 +18,7 @@ import Graph from "graphology";
 import type { Coordinates, EdgeDisplayData, NodeDisplayData } from "sigma/types";
 import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
+import "./node-edge-reducers.css";
 import lesMiserablesData from "@/data/graphs/les-miserables.json";
 
 // Track if graph has been loaded (persists across StrictMode remounts)
@@ -65,25 +66,9 @@ const SearchBar: FC<{
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        top: "20px",
-        left: "50%",
-        transform: "translateX(-50%)",
-        zIndex: 1000,
-      }}
-    >
-      <div
-        style={{
-          background: "rgba(26, 26, 26, 0.95)",
-          borderRadius: "8px",
-          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)",
-          padding: "12px 16px",
-          minWidth: "400px",
-        }}
-      >
-        <div style={{ position: "relative" }}>
+    <div className="node-edge-reducers-search-wrapper">
+      <div className="node-edge-reducers-search-panel">
+        <div className="node-edge-reducers-input-wrapper">
           <input
             ref={inputRef}
             type="text"
@@ -92,58 +77,20 @@ const SearchBar: FC<{
             onBlur={onBlur}
             placeholder="Search nodes..."
             list="node-suggestions"
-            style={{
-              width: "100%",
-              padding: "10px 12px",
-              paddingLeft: "36px",
-              border: "1px solid rgba(255, 255, 255, 0.1)",
-              borderRadius: "6px",
-              background: "rgba(255, 255, 255, 0.05)",
-              color: "#fff",
-              fontSize: "14px",
-              outline: "none",
-              transition: "all 0.2s",
-            }}
-            onFocus={(e) => {
-              e.currentTarget.style.background = "rgba(255, 255, 255, 0.1)";
-              e.currentTarget.style.borderColor = "#3b82f6";
-            }}
-            onBlurCapture={(e) => {
-              e.currentTarget.style.background = "rgba(255, 255, 255, 0.05)";
-              e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.1)";
-            }}
+            className="node-edge-reducers-search-input"
           />
-          {/* Search icon */}
-          <div
-            style={{
-              position: "absolute",
-              left: "12px",
-              top: "50%",
-              transform: "translateY(-50%)",
-              color: "#9ca3af",
-              fontSize: "16px",
-            }}
-          >
+          <div className="node-edge-reducers-search-icon">
             🔍
           </div>
         </div>
 
-        {/* Datalist for autocomplete */}
         <datalist id="node-suggestions">
           {suggestions.map((suggestion, idx) => (
             <option key={idx} value={suggestion} />
           ))}
         </datalist>
 
-        {/* Helper text */}
-        <div
-          style={{
-            marginTop: "8px",
-            fontSize: "11px",
-            color: "#9ca3af",
-            textAlign: "center",
-          }}
-        >
+        <div className="node-edge-reducers-helper-text">
           {value ? `${suggestions.length} suggestions` : "Type to search for nodes"}
         </div>
       </div>
@@ -300,7 +247,7 @@ const ReducerController: FC = () => {
 // Main component
 export const NodeEdgeReducers: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", position: "relative" }}>
+    <div className="node-edge-reducers-container">
       <SigmaContainer style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
         <LoadGraph />
         <ReducerController />

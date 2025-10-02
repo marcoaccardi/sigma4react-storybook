@@ -10,10 +10,11 @@
  */
 
 import type { FC } from "react";
+import "./variable-border-sizes.css";
 
 export const VariableBorderSizes: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="variable-border-sizes-placeholder">
       <p>TODO: Implement Node Border Variable Sizes example</p>
     </div>
   );

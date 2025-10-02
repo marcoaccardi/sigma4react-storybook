@@ -10,10 +10,11 @@
  */
 
 import type { FC } from "react";
+import "./map-interactions.css";
 
 export const MapInteractions: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="map-interactions-placeholder">
       <p>TODO: Implement Layer MapLibre Map Interactions example</p>
     </div>
   );

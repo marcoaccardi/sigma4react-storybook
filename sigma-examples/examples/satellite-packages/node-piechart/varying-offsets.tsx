@@ -10,10 +10,11 @@
  */
 
 import type { FC } from "react";
+import "./varying-offsets.css";
 
 export const VaryingOffsets: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="varying-offsets-placeholder">
       <p>TODO: Implement Node Piechart Varying Offsets example</p>
     </div>
   );

@@ -21,6 +21,7 @@ import { NodeBorderProgram } from "@sigma/node-border";
 import ForceSupervisor from "graphology-layout-force/worker";
 import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
+import "./custom-rendering.css";
 
 // Color constants
 const RED = "#FA4F40";
@@ -200,7 +201,7 @@ export const CustomRendering: FC = () => {
   const settings = useMemo(() => SETTINGS, []);
 
   return (
-    <SigmaContainer style={{ height: "100%", width: "100%" }} settings={settings}>
+    <SigmaContainer className="custom-rendering-container" settings={settings}>
       <LoadGraph />
       <ForceLayoutController />
     </SigmaContainer>

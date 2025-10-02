@@ -10,10 +10,11 @@
  */
 
 import type { FC } from "react";
+import "./metaballs.css";
 
 export const Metaballs: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="metaballs-placeholder">
       <p>TODO: Implement Layer WebGL Metaballs example</p>
     </div>
   );

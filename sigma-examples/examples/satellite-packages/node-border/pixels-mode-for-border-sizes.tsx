@@ -10,10 +10,11 @@
  */
 
 import type { FC } from "react";
+import "./pixels-mode-for-border-sizes.css";
 
 export const PixelsModeForBorderSizes: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="pixels-mode-for-border-sizes-placeholder">
       <p>TODO: Implement Node Border Pixels Mode example</p>
     </div>
   );

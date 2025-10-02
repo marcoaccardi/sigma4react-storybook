@@ -13,6 +13,7 @@ import { useLoadGraph } from "@react-sigma/core";
 import { SigmaContainer } from "@/components/SigmaContainer";
 import Graph from "graphology";
 import "@react-sigma/core/lib/style.css";
+import "./basic-graph.css";
 
 const SETTINGS = {
   renderLabels: true,
@@ -64,7 +65,7 @@ const LoadGraph: FC = () => {
 
 export const BasicGraph: FC = () => {
   return (
-    <SigmaContainer style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
+    <SigmaContainer className="basic-graph-container" settings={SETTINGS}>
       <LoadGraph />
     </SigmaContainer>
   );

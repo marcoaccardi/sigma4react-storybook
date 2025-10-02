@@ -10,10 +10,11 @@
  */
 
 import type { FC } from "react";
+import "./mixed-programs.css";
 
 export const MixedPrograms: FC = () => {
   return (
-    <div style={{ height: "100%", width: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="mixed-programs-placeholder">
       <p>TODO: Implement Node Square Mixed Programs example</p>
     </div>
   );

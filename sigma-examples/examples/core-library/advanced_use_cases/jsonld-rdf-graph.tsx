@@ -27,6 +27,7 @@ import forceAtlas2 from "graphology-layout-forceatlas2";
 import jsonld, { type NodeObject } from "jsonld";
 import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
+import "./jsonld-rdf-graph.css";
 import pinaColadaData from "@/data/graphs/pina-colada.jsonld";
 
 const SETTINGS = {
@@ -217,44 +218,14 @@ const ForceAtlas2Controls: FC = () => {
   };
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        top: "20px",
-        right: "20px",
-        background: "white",
-        padding: "16px",
-        borderRadius: "8px",
-        boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
-        fontFamily: "system-ui, -apple-system, sans-serif",
-      }}
-    >
+    <div className="jsonld-controls-panel">
       <button
         onClick={handleToggle}
-        style={{
-          padding: "12px 24px",
-          fontSize: "14px",
-          fontWeight: "600",
-          color: "white",
-          background: isRunning
-            ? "linear-gradient(135deg, #ef4444 0%, #dc2626 100%)"
-            : "linear-gradient(135deg, #10b981 0%, #059669 100%)",
-          border: "none",
-          borderRadius: "6px",
-          cursor: "pointer",
-          transition: "all 0.2s",
-          boxShadow: isRunning ? "0 4px 12px rgba(239, 68, 68, 0.4)" : "0 4px 12px rgba(16, 185, 129, 0.4)",
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.transform = "translateY(-2px)";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = "translateY(0)";
-        }}
+        className={`jsonld-toggle-button ${isRunning ? "running" : "stopped"}`}
       >
         {isRunning ? "⏸ Stop" : "▶ Start"} ForceAtlas2
       </button>
-      <div style={{ marginTop: "8px", fontSize: "12px", color: "#666", textAlign: "center" }}>
+      <div className="jsonld-status-text">
         {isRunning ? "Layout running..." : "Layout stopped"}
       </div>
     </div>
@@ -264,30 +235,17 @@ const ForceAtlas2Controls: FC = () => {
 // Info panel explaining the example
 const RDFGraphInfo: FC<{ stats: { nodes: number; edges: number } | null }> = ({ stats }) => {
   return (
-    <div
-      style={{
-        position: "absolute",
-        bottom: "20px",
-        left: "20px",
-        background: "rgba(255, 255, 255, 0.95)",
-        backdropFilter: "blur(10px)",
-        padding: "20px",
-        borderRadius: "8px",
-        boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
-        maxWidth: "400px",
-        fontFamily: "system-ui, -apple-system, sans-serif",
-      }}
-    >
-      <div style={{ fontSize: "16px", fontWeight: "600", marginBottom: "12px", color: "#111" }}>
+    <div className="jsonld-info-panel">
+      <div className="jsonld-info-title">
         🌐 JSON-LD / RDF Knowledge Graph
       </div>
 
-      <div style={{ fontSize: "13px", color: "#333", lineHeight: "1.6", marginBottom: "12px" }}>
+      <div className="jsonld-info-description">
         This example visualizes <strong>semantic web data</strong> (JSON-LD) as a knowledge graph. A Piña Colada recipe
         is parsed into RDF triples where:
       </div>
 
-      <ul style={{ margin: "0 0 12px 0", padding: "0 0 0 20px", fontSize: "13px", color: "#333" }}>
+      <ul className="jsonld-info-list">
         <li>
           <strong>Nodes</strong> = Entities (Recipe, Person, HowToStep)
         </li>
@@ -297,43 +255,35 @@ const RDFGraphInfo: FC<{ stats: { nodes: number; edges: number } | null }> = ({ 
       </ul>
 
       {stats && (
-        <div
-          style={{
-            padding: "12px",
-            background: "rgba(0, 0, 0, 0.03)",
-            borderRadius: "4px",
-            fontSize: "13px",
-            marginBottom: "12px",
-          }}
-        >
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "4px" }}>
-            <span style={{ color: "#666" }}>Nodes:</span>
-            <span style={{ fontWeight: "600", color: "#111" }}>{stats.nodes}</span>
+        <div className="jsonld-stats-box">
+          <div className="jsonld-stat-row">
+            <span className="jsonld-stat-label">Nodes:</span>
+            <span className="jsonld-stat-value">{stats.nodes}</span>
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <span style={{ color: "#666" }}>Edges:</span>
-            <span style={{ fontWeight: "600", color: "#111" }}>{stats.edges}</span>
+          <div className="jsonld-stat-row">
+            <span className="jsonld-stat-label">Edges:</span>
+            <span className="jsonld-stat-value">{stats.edges}</span>
           </div>
         </div>
       )}
 
-      <div style={{ fontSize: "12px", color: "#999" }}>
-        <strong>Color Legend:</strong>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", marginTop: "6px" }}>
-          <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-            <div style={{ width: "12px", height: "12px", background: "#3b82f6", borderRadius: "50%" }} />
+      <div className="jsonld-legend">
+        <span className="jsonld-legend-title">Color Legend:</span>
+        <div className="jsonld-legend-items">
+          <span className="jsonld-legend-item">
+            <div className="jsonld-legend-dot" style={{ background: "#3b82f6" }} />
             Recipe
           </span>
-          <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-            <div style={{ width: "12px", height: "12px", background: "#10b981", borderRadius: "50%" }} />
+          <span className="jsonld-legend-item">
+            <div className="jsonld-legend-dot" style={{ background: "#10b981" }} />
             Person
           </span>
-          <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-            <div style={{ width: "12px", height: "12px", background: "#f59e0b", borderRadius: "50%" }} />
+          <span className="jsonld-legend-item">
+            <div className="jsonld-legend-dot" style={{ background: "#f59e0b" }} />
             Step
           </span>
-          <span style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-            <div style={{ width: "12px", height: "12px", background: "#6b7280", borderRadius: "50%" }} />
+          <span className="jsonld-legend-item">
+            <div className="jsonld-legend-dot" style={{ background: "#6b7280" }} />
             Value
           </span>
         </div>

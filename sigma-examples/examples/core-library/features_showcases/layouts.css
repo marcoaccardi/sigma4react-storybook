@@ -1,0 +1,73 @@
+/* Layouts Example Styles */
+
+.layouts-control-panel {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(26, 26, 26, 0.95);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 200px;
+}
+
+.layouts-panel-header {
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.layouts-button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.layouts-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.layouts-button:active {
+  transform: translateY(0);
+}
+
+.layouts-button-fa2 {
+  background: #374151;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.layouts-button-fa2.running {
+  background: #22c55e;
+}
+
+.layouts-button-fa2-status {
+  font-size: 10px;
+  opacity: 0.8;
+}
+
+.layouts-button-circular {
+  background: #3b82f6;
+}
+
+.layouts-button-random {
+  background: #8b5cf6;
+}
+
+.layouts-info-text {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 4px;
+  line-height: 1.4;
+}

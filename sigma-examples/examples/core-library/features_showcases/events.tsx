@@ -16,6 +16,7 @@ import { useLoadGraph, useSigma, useRegisterEvents } from "@react-sigma/core";
 import Graph from "graphology";
 import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
+import "./events.css";
 import lesMiserablesData from "@/data/graphs/les-miserables.json";
 
 // Track if graph has been loaded (persists across StrictMode remounts)
@@ -220,89 +221,37 @@ const EventLogPanel: FC<{ logs: EventLog[] }> = ({ logs }) => {
   };
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        bottom: "20px",
-        right: "20px",
-        width: "400px",
-        maxHeight: isExpanded ? "400px" : "48px",
-        background: "rgba(26, 26, 26, 0.95)",
-        borderRadius: "8px",
-        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)",
-        overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
-        transition: "max-height 0.3s ease",
-      }}
-    >
+    <div className={`events-log-panel ${isExpanded ? "expanded" : "collapsed"}`}>
       {/* Header */}
       <div
-        style={{
-          padding: "12px 16px",
-          borderBottom: isExpanded ? "1px solid rgba(255, 255, 255, 0.1)" : "none",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          cursor: "pointer",
-        }}
+        className={`events-log-header ${isExpanded ? "expanded" : ""}`}
         onClick={() => setIsExpanded(!isExpanded)}
       >
-        <div style={{ color: "#fff", fontWeight: "600", fontSize: "14px" }}>
+        <div className="events-log-title">
           Event Log ({logs.length})
         </div>
-        <div
-          style={{
-            color: "#9ca3af",
-            fontSize: "12px",
-            transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
-            transition: "transform 0.3s ease",
-          }}
-        >
+        <div className={`events-log-chevron ${isExpanded ? "expanded" : ""}`}>
           ▼
         </div>
       </div>
 
       {/* Event list */}
       {isExpanded && (
-        <div
-          style={{
-            flex: 1,
-            overflowY: "auto",
-            padding: "8px",
-            display: "flex",
-            flexDirection: "column",
-            gap: "4px",
-          }}
-        >
+        <div className="events-log-list">
           {logs.length === 0 ? (
-            <div
-              style={{
-                color: "#6b7280",
-                fontSize: "13px",
-                textAlign: "center",
-                padding: "20px",
-              }}
-            >
+            <div className="events-log-empty">
               Interact with the graph to see events
             </div>
           ) : (
             logs.map((log) => (
               <div
                 key={log.id}
-                style={{
-                  background: "rgba(255, 255, 255, 0.05)",
-                  borderRadius: "4px",
-                  padding: "8px 10px",
-                  fontSize: "12px",
-                  fontFamily: 'Monaco, "Courier New", monospace',
-                  borderLeft: `3px solid ${getEventColor(log.type)}`,
-                }}
+                className={`events-log-item ${log.type}`}
               >
-                <div style={{ color: getEventColor(log.type), fontWeight: "600", marginBottom: "2px" }}>
+                <div className="events-log-event-name" style={{ color: getEventColor(log.type) }}>
                   {log.event}
                 </div>
-                <div style={{ color: "#d1d5db" }}>{log.message}</div>
+                <div className="events-log-event-message">{log.message}</div>
               </div>
             ))
           )}

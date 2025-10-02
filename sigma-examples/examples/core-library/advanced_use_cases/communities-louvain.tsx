@@ -23,6 +23,7 @@ import louvain from "graphology-communities-louvain";
 import iwanthue from "iwanthue";
 import { fitViewportToNodes } from "@sigma/utils";
 import "@react-sigma/core/lib/style.css";
+import "./communities-louvain.css";
 
 // Import Les Misérables data
 import lesMiserablesData from "@/data/graphs/les-miserables.json";
@@ -101,50 +102,19 @@ const CommunityButtons: FC<{
   };
 
   return (
-    <div style={styles.buttonsContainer}>
+    <div className="communities-louvain-buttons-container">
       {communities.map((community) => (
         <button
           key={community}
           onClick={() => handleCommunityClick(community)}
-          style={{
-            ...styles.button,
-            color: palette[community],
-          }}
+          className="communities-louvain-button"
+          style={{ color: palette[community] }}
         >
           Community n°{community + 1}
         </button>
       ))}
     </div>
   );
-};
-
-// Styles
-const styles: Record<string, React.CSSProperties> = {
-  container: {
-    position: "relative",
-    height: "100%",
-    width: "100%",
-  },
-  buttonsContainer: {
-    position: "absolute",
-    right: "10px",
-    bottom: "10px",
-    display: "flex",
-    flexDirection: "column",
-    gap: "3px",
-    zIndex: 1000,
-  },
-  button: {
-    padding: "8px 16px",
-    border: "2px solid currentColor",
-    borderRadius: "6px",
-    backgroundColor: "white",
-    cursor: "pointer",
-    fontSize: "14px",
-    fontWeight: 500,
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-    transition: "all 0.2s",
-  },
 };
 
 // Main component
@@ -161,7 +131,7 @@ export const CommunitiesLouvain: FC = () => {
   }, []); // Empty deps - function is stable across renders, preventing infinite loop
 
   return (
-    <div style={styles.container}>
+    <div className="communities-louvain-container">
       <SigmaContainer
         style={{ height: "100%", width: "100%" }}
         settings={SETTINGS}

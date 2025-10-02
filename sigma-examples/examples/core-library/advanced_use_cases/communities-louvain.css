@@ -1,0 +1,27 @@
+.communities-louvain-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.communities-louvain-buttons-container {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  z-index: 1000;
+}
+
+.communities-louvain-button {
+  padding: 8px 16px;
+  border: 2px solid currentColor;
+  border-radius: 6px;
+  background-color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: all 0.2s;
+}

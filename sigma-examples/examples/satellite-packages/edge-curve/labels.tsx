@@ -19,6 +19,7 @@ import { MultiGraph } from 'graphology';
 import EdgeCurveProgram from '@sigma/edge-curve';
 import { EdgeArrowProgram } from 'sigma/rendering';
 import '@react-sigma/core/lib/style.css';
+import './labels.css';
 
 // Settings (immutable)
 const SETTINGS = {
@@ -97,10 +98,7 @@ const LoadGraph: FC = () => {
 // Main export
 export const Labels: FC = () => {
   return (
-    <SigmaContainer
-      style={{ height: '100%', width: '100%' }}
-      settings={SETTINGS}
-    >
+    <SigmaContainer className="labels-container" settings={SETTINGS}>
       <LoadGraph />
     </SigmaContainer>
   );
