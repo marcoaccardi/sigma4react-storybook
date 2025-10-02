@@ -40,7 +40,7 @@ const createGraphFromGexf = () => {
 
   // Copy edges, automatically deduplicating
   const addedEdges = new Set<string>();
-  multiGraph.forEachEdge((edge, attributes, source, target) => {
+  multiGraph.forEachEdge((_edge, attributes, source, target) => {
     const edgeKey = [source, target].sort().join("-");
     if (!addedEdges.has(edgeKey)) {
       addedEdges.add(edgeKey);

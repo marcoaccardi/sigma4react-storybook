@@ -22,6 +22,7 @@ import { NodeImageProgram } from "@sigma/node-image";
 import { DEFAULT_NODE_PROGRAM_CLASSES } from "sigma/settings";
 import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
+import "./custom-layers-and-renderers.css";
 
 // Settings
 const SETTINGS = {
@@ -30,101 +31,6 @@ const SETTINGS = {
     image: NodeImageProgram,
   },
   allowInvalidContainer: true, // Prevents width errors during NodeImageProgram initialization
-};
-
-// Modern UI Styles
-const STYLES = {
-  panel: {
-    position: "absolute" as const,
-    top: "16px",
-    left: "16px",
-    maxWidth: "300px",
-    background: "rgba(255, 255, 255, 0.95)",
-    backdropFilter: "blur(10px)",
-    borderRadius: "12px",
-    boxShadow: "0 4px 24px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08)",
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-    fontSize: "14px",
-    zIndex: 1000,
-    border: "1px solid rgba(0, 0, 0, 0.08)",
-  },
-  panelHeader: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: "16px 20px",
-    borderBottom: "1px solid rgba(0, 0, 0, 0.08)",
-    cursor: "pointer",
-    userSelect: "none" as const,
-  },
-  panelTitle: {
-    margin: 0,
-    fontSize: "16px",
-    fontWeight: 600,
-    color: "#1a1a1a",
-  },
-  panelContent: {
-    padding: "20px",
-  },
-  section: {
-    marginBottom: "20px",
-  },
-  sectionTitle: {
-    margin: "0 0 12px 0",
-    fontSize: "13px",
-    fontWeight: 600,
-    color: "#666",
-    textTransform: "uppercase" as const,
-    letterSpacing: "0.5px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  badge: {
-    background: "rgba(59, 130, 246, 0.1)",
-    color: "#3b82f6",
-    padding: "2px 8px",
-    borderRadius: "10px",
-    fontSize: "11px",
-    fontWeight: 600,
-  },
-  checkboxLabel: {
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
-    cursor: "pointer",
-    padding: "8px",
-    borderRadius: "6px",
-    transition: "background 0.2s ease",
-    marginBottom: "6px",
-  },
-  checkbox: {
-    width: "18px",
-    height: "18px",
-    cursor: "pointer",
-    accentColor: "#3b82f6",
-  },
-  button: {
-    width: "100%",
-    padding: "14px 24px",
-    background: "linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)",
-    color: "white",
-    border: "none",
-    borderRadius: "8px",
-    fontSize: "15px",
-    fontWeight: 600,
-    cursor: "pointer",
-    transition: "transform 0.2s ease, box-shadow 0.2s ease",
-    boxShadow: "0 4px 12px rgba(59, 130, 246, 0.3)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "8px",
-  },
-  chevron: {
-    transition: "transform 0.3s ease",
-    fontSize: "12px",
-  },
 };
 
 // Create graph outside component to ensure stability
@@ -279,28 +185,23 @@ const ExportControls: FC<{ graph: Graph }> = ({ graph }) => {
   };
 
   return (
-    <div style={STYLES.panel}>
+    <div className="custom-layers-panel">
       {/* Header with collapse button */}
-      <div style={STYLES.panelHeader} onClick={() => setIsExpanded(!isExpanded)}>
-        <h4 style={STYLES.panelTitle}>🖼️ Export Controls</h4>
-        <span
-          style={{
-            ...STYLES.chevron,
-            transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
-          }}
-        >
+      <div className="custom-layers-panel-header" onClick={() => setIsExpanded(!isExpanded)}>
+        <h4 className="custom-layers-panel-title">🖼️ Export Controls</h4>
+        <span className={`custom-layers-chevron ${isExpanded ? "expanded" : ""}`}>
           ▼
         </span>
       </div>
 
       {/* Collapsible content */}
       {isExpanded && (
-        <div style={STYLES.panelContent}>
+        <div className="custom-layers-panel-content">
           {/* Layers Section */}
-          <div style={STYLES.section}>
-            <div style={STYLES.sectionTitle}>
+          <div className="custom-layers-section">
+            <div className="custom-layers-section-title">
               <span>Export Layers</span>
-              <span style={STYLES.badge}>
+              <span className="custom-layers-badge">
                 {selectedLayers.size}/{allLayers.length}
               </span>
             </div>
@@ -308,18 +209,14 @@ const ExportControls: FC<{ graph: Graph }> = ({ graph }) => {
               <label
                 key={layer}
                 htmlFor={`layer-${layer}`}
-                style={STYLES.checkboxLabel}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.background = "rgba(59, 130, 246, 0.08)")
-                }
-                onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+                className="custom-layers-checkbox-label"
               >
                 <input
                   type="checkbox"
                   id={`layer-${layer}`}
                   checked={selectedLayers.has(layer)}
                   onChange={() => toggleLayer(layer)}
-                  style={STYLES.checkbox}
+                  className="custom-layers-checkbox"
                 />
                 <span>{startCase(layer)}</span>
               </label>
@@ -327,25 +224,19 @@ const ExportControls: FC<{ graph: Graph }> = ({ graph }) => {
           </div>
 
           {/* Rendering Options Section */}
-          <div style={STYLES.section}>
-            <div style={STYLES.sectionTitle}>Rendering Options</div>
+          <div className="custom-layers-section">
+            <div className="custom-layers-section-title">Rendering Options</div>
             <label
               htmlFor="include-images"
-              style={{
-                ...STYLES.checkboxLabel,
-                marginBottom: 0,
-              }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.background = "rgba(59, 130, 246, 0.08)")
-              }
-              onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}
+              className="custom-layers-checkbox-label"
+              style={{ marginBottom: 0 }}
             >
               <input
                 type="checkbox"
                 id="include-images"
                 checked={includeImages}
                 onChange={(e) => setIncludeImages(e.target.checked)}
-                style={STYLES.checkbox}
+                className="custom-layers-checkbox"
               />
               <span>Include node images</span>
             </label>
@@ -355,21 +246,7 @@ const ExportControls: FC<{ graph: Graph }> = ({ graph }) => {
           <button
             type="button"
             onClick={handleExport}
-            style={STYLES.button}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = "scale(1.02)";
-              e.currentTarget.style.boxShadow = "0 6px 16px rgba(59, 130, 246, 0.4)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = "scale(1)";
-              e.currentTarget.style.boxShadow = "0 4px 12px rgba(59, 130, 246, 0.3)";
-            }}
-            onMouseDown={(e) => {
-              e.currentTarget.style.transform = "scale(0.98)";
-            }}
-            onMouseUp={(e) => {
-              e.currentTarget.style.transform = "scale(1.02)";
-            }}
+            className="custom-layers-button"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />

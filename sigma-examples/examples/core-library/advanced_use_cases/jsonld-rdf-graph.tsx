@@ -18,7 +18,7 @@
  * - Edges = Predicates (name, author, recipeIngredient, etc.)
  */
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import type { FC } from "react";
 import { useLoadGraph, useSigma } from "@react-sigma/core";
 import { useWorkerLayoutForceAtlas2 } from "@react-sigma/layout-forceatlas2";

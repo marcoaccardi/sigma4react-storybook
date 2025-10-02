@@ -11,7 +11,7 @@
  * - Async data loading with fetch
  */
 
-import { useEffect, useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import type { FC } from "react";
 import { useSigma } from "@react-sigma/core";
 import Graph from "graphology";
