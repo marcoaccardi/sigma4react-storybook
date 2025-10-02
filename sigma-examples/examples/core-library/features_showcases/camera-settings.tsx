@@ -11,78 +11,44 @@
  * - Contextual UI (disabled states based on toggles)
  */
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import type { FC } from "react";
-import { useLoadGraph, useSigma } from "@react-sigma/core";
+import { useSigma } from "@react-sigma/core";
 import Graph from "graphology";
 import { MultiGraph } from "graphology";
 import { parse } from "graphology-gexf/browser";
 import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
+import arcticGexfText from "@/data/graphs/arctic.gexf?raw";
 import "@react-sigma/core/lib/style.css";
 
 const SETTINGS = {
   renderLabels: true,
 };
 
-// Track if graph has been loaded (persists across StrictMode remounts)
-let graphLoaded = false;
+// Parse GEXF data at module level
+const createGraphFromGexf = () => {
+  // Parse GEXF with MultiGraph to handle duplicate edges in the file
+  const multiGraph = parse(MultiGraph, arcticGexfText);
 
-// Component to load GEXF file and populate graph
-const LoadGexf: FC = () => {
-  const loadGraph = useLoadGraph();
+  // Convert to simple Graph by deduplicating edges
+  const graph = new Graph();
 
-  useEffect(() => {
-    // Only load once - prevents double loading in React StrictMode
-    if (graphLoaded) return;
+  // Copy all nodes with their attributes
+  multiGraph.forEachNode((node, attributes) => {
+    graph.addNode(node, attributes);
+  });
 
-    let cancelled = false;
+  // Copy edges, automatically deduplicating
+  const addedEdges = new Set<string>();
+  multiGraph.forEachEdge((edge, attributes, source, target) => {
+    const edgeKey = [source, target].sort().join("-");
+    if (!addedEdges.has(edgeKey)) {
+      addedEdges.add(edgeKey);
+      graph.addEdge(source, target, attributes);
+    }
+  });
 
-    // Fetch GEXF file from public folder
-    fetch("/arctic.gexf")
-      .then((res) => res.text())
-      .then((gexf) => {
-        if (cancelled) return;
-
-        // Parse GEXF with MultiGraph to handle duplicate edges in the file
-        const multiGraph = parse(MultiGraph, gexf);
-
-        // Convert to simple Graph by deduplicating edges
-        const graph = new Graph();
-
-        // Copy all nodes with their attributes
-        multiGraph.forEachNode((node, attributes) => {
-          graph.addNode(node, attributes);
-        });
-
-        // Copy edges, automatically deduplicating
-        const addedEdges = new Set<string>();
-        multiGraph.forEachEdge((edge, attributes, source, target) => {
-          const edgeKey = [source, target].sort().join("-");
-          if (!addedEdges.has(edgeKey)) {
-            addedEdges.add(edgeKey);
-            graph.addEdge(source, target, attributes);
-          }
-        });
-
-        loadGraph(graph);
-        graphLoaded = true;
-      })
-      .catch((error) => {
-        if (cancelled) return;
-        console.error("Error loading GEXF file:", error);
-        // Create a simple fallback graph if file loading fails
-        const fallbackGraph = new Graph();
-        fallbackGraph.addNode("1", { x: 0, y: 0, size: 10, label: "Error loading GEXF file", color: "#ff0000" });
-        loadGraph(fallbackGraph);
-        graphLoaded = true;
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [loadGraph]);
-
-  return null;
+  return graph;
 };
 
 // Component for camera controls
