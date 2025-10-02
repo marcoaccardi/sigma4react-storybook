@@ -18,7 +18,7 @@ import Graph from "graphology";
 import type { EdgeDisplayData, NodeDisplayData } from "sigma/types";
 import "@react-sigma/core/lib/style.css";
 
-import data from "../../../src/data/les-miserables.json";
+import data from "@/data/graphs/les-miserables.json";
 
 // Settings with curved edges enabled
 const SETTINGS = {

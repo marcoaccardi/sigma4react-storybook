@@ -17,7 +17,7 @@ import Graph from "graphology";
 import type { Attributes } from "graphology-types";
 import "@react-sigma/core/lib/style.css";
 
-import airportsData from "./data/airports.json";
+import airportsData from "@/data/graphs/airports.json";
 
 // Settings
 const SETTINGS = {
