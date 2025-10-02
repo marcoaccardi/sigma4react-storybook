@@ -296,10 +296,11 @@ const CameraControls: FC = () => {
 
 // Main component
 export const CameraSettings: FC = () => {
+  const graph = useMemo(() => createGraphFromGexf(), []);
+
   return (
     <div style={{ height: "100%", width: "100%", position: "relative" }}>
-      <SigmaContainerWithCleanup style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
-        <LoadGexf />
+      <SigmaContainerWithCleanup style={{ height: "100%", width: "100%" }} settings={SETTINGS} graph={graph}>
         <CameraControls />
       </SigmaContainerWithCleanup>
     </div>
