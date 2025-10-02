@@ -189,10 +189,11 @@ When you encounter new patterns or mistakes:
 4. **General rule change?** Update [CLAUDE.md](../../../CLAUDE.md)
 
 ### Version Information
-- **Last updated:** 2025-10-01
+- **Last updated:** 2025-10-02
 - **React Sigma version:** 5.0.4
 - **Sigma.js version:** 3.0.2
 - **Graphology version:** 0.26.0
+- **Examples converted:** 23+ (46 total files)
 
 ---
 
