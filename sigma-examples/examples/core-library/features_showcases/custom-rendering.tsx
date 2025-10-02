@@ -22,6 +22,8 @@ import ForceSupervisor from "graphology-layout-force/worker";
 import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
 import "./custom-rendering.css";
+import userSvg from "@/data/assets/user.svg";
+import citySvg from "@/data/assets/city.svg";
 
 // Color constants
 const RED = "#FA4F40";
@@ -50,7 +52,7 @@ const LoadGraph: FC = () => {
       size: 15,
       label: "John",
       type: "image",
-      image: "/src/data/assets/user.svg",
+      image: userSvg,
       color: RED,
     });
 
@@ -58,7 +60,7 @@ const LoadGraph: FC = () => {
       size: 15,
       label: "Mary",
       type: "image",
-      image: "/src/data/assets/user.svg",
+      image: userSvg,
       color: RED,
     });
 
@@ -66,7 +68,7 @@ const LoadGraph: FC = () => {
       size: 15,
       label: "Suzan",
       type: "image",
-      image: "/src/data/assets/user.svg",
+      image: userSvg,
       color: RED,
     });
 
@@ -75,7 +77,7 @@ const LoadGraph: FC = () => {
       size: 15,
       label: "Nantes",
       type: "image",
-      image: "/src/data/assets/city.svg",
+      image: citySvg,
       color: BLUE,
     });
 
@@ -83,7 +85,7 @@ const LoadGraph: FC = () => {
       size: 15,
       label: "New-York",
       type: "image",
-      image: "/src/data/assets/city.svg",
+      image: citySvg,
       color: BLUE,
     });
 
