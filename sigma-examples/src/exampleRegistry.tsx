@@ -23,6 +23,7 @@ import { ParallelEdges } from '../examples/satellite-packages/edge-curve/paralle
 import { AvailableOptions as ExportImageAvailableOptions } from '../examples/satellite-packages/export-image/available-options';
 import { CustomLayersAndRenderers } from '../examples/satellite-packages/export-image/custom-layers-and-renderers';
 import { BasicExample as LayerLeafletBasicExample } from '../examples/satellite-packages/layer-leaflet/basic-example';
+import { FitViewportToNodes } from '../examples/satellite-packages/utils/fit-viewport-to-nodes';
 
 export interface Example {
   id: string;
@@ -209,6 +210,14 @@ export const exampleRegistry: Example[] = [
     component: LayerLeafletBasicExample,
     description: 'Sigma graph overlay on Leaflet map showing airport network with geographic coordinates (lat/lng)',
     storybookUrl: 'https://www.sigmajs.org/storybook/?path=/story/layer-leaflet--story',
+  },
+  {
+    id: 'utils-fit-viewport-to-nodes',
+    name: 'Utils - Fit Viewport to Nodes',
+    category: 'Satellite Packages',
+    component: FitViewportToNodes,
+    description: 'Zoom and fit viewport to specific node selections using fitViewportToNodes from @sigma/utils with animated transitions',
+    storybookUrl: 'https://www.sigmajs.org/storybook/?path=/story/utils-fit-viewport-to-nodes--story',
   },
   // Add more examples here as you convert them
 ];
