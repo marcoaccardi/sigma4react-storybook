@@ -17,7 +17,7 @@ import { useLoadGraph, useSigma } from "@react-sigma/core";
 import { downloadAsImage } from "@sigma/export-image";
 import Graph from "graphology";
 import ForceSupervisor from "graphology-layout-force/worker";
-import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
 
 // Color constants
@@ -526,10 +526,10 @@ const ExportControls: FC = () => {
 export const AvailableOptions: FC = () => {
   return (
     <div style={{ position: "relative", height: "100%", width: "100%" }}>
-      <SigmaContainerWithCleanup style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
+      <SigmaContainer style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
         <LoadGraph />
         <ExportControls />
-      </SigmaContainerWithCleanup>
+      </SigmaContainer>
     </div>
   );
 };

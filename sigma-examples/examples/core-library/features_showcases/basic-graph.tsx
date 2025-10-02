@@ -10,7 +10,7 @@
 import { useEffect } from "react";
 import type { FC } from "react";
 import { useLoadGraph } from "@react-sigma/core";
-import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import Graph from "graphology";
 import "@react-sigma/core/lib/style.css";
 
@@ -64,8 +64,8 @@ const LoadGraph: FC = () => {
 
 export const BasicGraph: FC = () => {
   return (
-    <SigmaContainerWithCleanup style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
+    <SigmaContainer style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
       <LoadGraph />
-    </SigmaContainerWithCleanup>
+    </SigmaContainer>
   );
 };

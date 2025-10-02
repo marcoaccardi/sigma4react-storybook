@@ -13,7 +13,7 @@
 import { useEffect, useState, useCallback } from "react";
 import type { FC } from "react";
 import { useLoadGraph, useSigma } from "@react-sigma/core";
-import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import Graph from "graphology";
 import louvain from "graphology-communities-louvain";
 import iwanthue from "iwanthue";
@@ -158,10 +158,10 @@ export const FitViewportToNodes: FC = () => {
 
   return (
     <div style={styles.container}>
-      <SigmaContainerWithCleanup style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
+      <SigmaContainer style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
         <LoadGraph onCommunitiesDetected={handleCommunitiesDetected} />
         {communities.length > 0 && <FitViewportButtons communities={communities} palette={palette} />}
-      </SigmaContainerWithCleanup>
+      </SigmaContainer>
     </div>
   );
 };

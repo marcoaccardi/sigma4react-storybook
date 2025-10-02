@@ -11,18 +11,18 @@
  * - Layout control panel UI
  */
 
-import { FC, useEffect, useState, useCallback } from "react";
+import type { FC } from "react";
+import { useEffect, useState, useCallback } from "react";
 import {
   useLoadGraph,
   useSigma,
 } from "@react-sigma/core";
 import Graph from "graphology";
-import { circular } from "graphology-layout";
 import forceAtlas2 from "graphology-layout-forceatlas2";
 import { useWorkerLayoutForceAtlas2 } from "@react-sigma/layout-forceatlas2";
 import { useLayoutCircular } from "@react-sigma/layout-circular";
 import { animateNodes } from "sigma/utils";
-import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
 import lesMiserablesData from "@/data/graphs/les-miserables.json";
 
@@ -300,10 +300,10 @@ const LayoutControlPanel: FC<{
 export const Layouts: FC = () => {
   return (
     <div style={{ height: "100%", width: "100%", position: "relative" }}>
-      <SigmaContainerWithCleanup style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
+      <SigmaContainer style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
         <LoadGraph />
         <LayoutController />
-      </SigmaContainerWithCleanup>
+      </SigmaContainer>
     </div>
   );
 };

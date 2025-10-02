@@ -17,7 +17,7 @@
 import { useEffect, useState, useCallback } from "react";
 import type { FC } from "react";
 import { useLoadGraph, useSigma } from "@react-sigma/core";
-import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import Graph from "graphology";
 import louvain from "graphology-communities-louvain";
 import iwanthue from "iwanthue";
@@ -162,7 +162,7 @@ export const CommunitiesLouvain: FC = () => {
 
   return (
     <div style={styles.container}>
-      <SigmaContainerWithCleanup
+      <SigmaContainer
         style={{ height: "100%", width: "100%" }}
         settings={SETTINGS}
       >
@@ -170,7 +170,7 @@ export const CommunitiesLouvain: FC = () => {
         {communities.length > 0 && (
           <CommunityButtons communities={communities} palette={palette} />
         )}
-      </SigmaContainerWithCleanup>
+      </SigmaContainer>
     </div>
   );
 };

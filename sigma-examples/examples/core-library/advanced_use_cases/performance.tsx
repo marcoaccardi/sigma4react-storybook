@@ -19,8 +19,9 @@ import Graph from "graphology";
 import clusters from "graphology-generators/random/clusters";
 import { circlepack } from "graphology-layout";
 import seedrandom from "seedrandom";
-import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
+import "./performance.css";
 
 // Types
 interface GraphConfig {
@@ -140,17 +141,17 @@ const ControlPanel: FC<{
   };
 
   return (
-    <div style={styles.panel}>
-      <h3 style={styles.title}>Graph Configuration</h3>
+    <div className="performance-panel">
+      <h3 className="performance-panel-title">Graph Configuration</h3>
 
-      <div style={styles.controlGroup}>
-        <label style={styles.label}>
+      <div className="performance-control-group">
+        <label className="performance-label">
           Number of nodes
           <input
             type="number"
             value={config.order}
             onChange={(e) => handleChange("order", parseInt(e.target.value))}
-            style={styles.input}
+            className="performance-input"
             min="100"
             max="50000"
             step="100"
@@ -158,14 +159,14 @@ const ControlPanel: FC<{
         </label>
       </div>
 
-      <div style={styles.controlGroup}>
-        <label style={styles.label}>
+      <div className="performance-control-group">
+        <label className="performance-label">
           Number of edges
           <input
             type="number"
             value={config.size}
             onChange={(e) => handleChange("size", parseInt(e.target.value))}
-            style={styles.input}
+            className="performance-input"
             min="100"
             max="100000"
             step="100"
@@ -173,65 +174,62 @@ const ControlPanel: FC<{
         </label>
       </div>
 
-      <div style={styles.controlGroup}>
-        <label style={styles.label}>
+      <div className="performance-control-group">
+        <label className="performance-label">
           Number of clusters
           <input
             type="number"
             value={config.clusters}
             onChange={(e) => handleChange("clusters", parseInt(e.target.value))}
-            style={styles.input}
+            className="performance-input"
             min="1"
             max="10"
           />
         </label>
       </div>
 
-      <div style={styles.controlGroup}>
-        <label style={styles.label}>Edges renderer</label>
-        <div style={styles.radioGroup}>
-          <label style={styles.radioLabel}>
+      <div className="performance-control-group">
+        <label className="performance-label">Edges renderer</label>
+        <div className="performance-radio-group">
+          <label className="performance-radio-label">
             <input
               type="radio"
               name="edgesRenderer"
               value="edges-default"
               checked={config.edgesRenderer === "edges-default"}
               onChange={(e) => handleChange("edgesRenderer", e.target.value)}
-              style={styles.radio}
+              className="performance-radio"
             />
             Default
           </label>
-          <label style={styles.radioLabel}>
+          <label className="performance-radio-label">
             <input
               type="radio"
               name="edgesRenderer"
               value="edges-fast"
               checked={config.edgesRenderer === "edges-fast"}
               onChange={(e) => handleChange("edgesRenderer", e.target.value)}
-              style={styles.radio}
+              className="performance-radio"
             />
             Faster (1px edges)
           </label>
         </div>
       </div>
 
-      <div style={styles.buttonGroup}>
-        <button onClick={onReset} style={styles.button}>
+      <div className="performance-button-group">
+        <button onClick={onReset} className="performance-button">
           Reset Graph
         </button>
         <button
           onClick={onToggleLayout}
-          style={{
-            ...styles.button,
-            ...styles.primaryButton,
-          }}
+          className="performance-button performance-button-primary"
         >
           {layoutRunning ? "⏸ Stop Layout" : "▶ Start Layout"}
         </button>
       </div>
 
-      <div style={styles.stats}>
-        <small style={styles.statsText}>
+      <div className="performance-stats">
+        <small className="performance-stats-text">
           {config.order.toLocaleString()} nodes × {config.size.toLocaleString()} edges
         </small>
       </div>
@@ -239,109 +237,6 @@ const ControlPanel: FC<{
   );
 };
 
-// Styles
-const styles: Record<string, React.CSSProperties> = {
-  container: {
-    display: "flex",
-    height: "100%",
-    width: "100%",
-    position: "relative",
-  },
-  sigmaContainer: {
-    flex: 1,
-    height: "100%",
-  },
-  panel: {
-    position: "absolute",
-    top: "20px",
-    right: "20px",
-    backgroundColor: "white",
-    padding: "24px",
-    borderRadius: "12px",
-    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
-    minWidth: "280px",
-    maxWidth: "320px",
-    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-    zIndex: 1000,
-  },
-  title: {
-    margin: "0 0 20px 0",
-    fontSize: "18px",
-    fontWeight: 600,
-    color: "#1a1a1a",
-  },
-  controlGroup: {
-    marginBottom: "20px",
-  },
-  label: {
-    display: "block",
-    fontSize: "14px",
-    fontWeight: 500,
-    color: "#333",
-    marginBottom: "8px",
-  },
-  input: {
-    width: "100%",
-    padding: "10px 12px",
-    marginTop: "6px",
-    border: "2px solid #e0e0e0",
-    borderRadius: "8px",
-    fontSize: "14px",
-    fontFamily: "inherit",
-    transition: "border-color 0.2s",
-    outline: "none",
-  },
-  radioGroup: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px",
-    marginTop: "8px",
-  },
-  radioLabel: {
-    display: "flex",
-    alignItems: "center",
-    fontSize: "14px",
-    color: "#555",
-    cursor: "pointer",
-  },
-  radio: {
-    marginRight: "8px",
-    cursor: "pointer",
-  },
-  buttonGroup: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "10px",
-    marginTop: "24px",
-  },
-  button: {
-    padding: "12px 20px",
-    border: "2px solid #e0e0e0",
-    borderRadius: "8px",
-    fontSize: "14px",
-    fontWeight: 500,
-    cursor: "pointer",
-    backgroundColor: "white",
-    color: "#333",
-    transition: "all 0.2s",
-    fontFamily: "inherit",
-  },
-  primaryButton: {
-    backgroundColor: "#4a90e2",
-    color: "white",
-    borderColor: "#4a90e2",
-  },
-  stats: {
-    marginTop: "16px",
-    paddingTop: "16px",
-    borderTop: "1px solid #e0e0e0",
-    textAlign: "center",
-  },
-  statsText: {
-    color: "#666",
-    fontSize: "12px",
-  },
-};
 
 // Main Component
 export const Performance: FC = () => {
@@ -370,16 +265,16 @@ export const Performance: FC = () => {
   }, []);
 
   return (
-    <div style={styles.container}>
-      <SigmaContainerWithCleanup
+    <div className="performance-container">
+      <SigmaContainer
         key={graphKey}
-        style={styles.sigmaContainer}
+        className="performance-sigma-container"
         settings={settings}
       >
         <LoadGraph config={config} />
         <LayoutController isRunning={layoutRunning} />
         <CameraSetup />
-      </SigmaContainerWithCleanup>
+      </SigmaContainer>
 
       <ControlPanel
         config={config}

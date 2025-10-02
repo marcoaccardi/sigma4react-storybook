@@ -17,7 +17,7 @@ import { useSigma } from "@react-sigma/core";
 import Graph from "graphology";
 import { MultiGraph } from "graphology";
 import { parse } from "graphology-gexf/browser";
-import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import arcticGexfText from "@/data/graphs/arctic.gexf?raw";
 import "@react-sigma/core/lib/style.css";
 
@@ -300,9 +300,9 @@ export const CameraSettings: FC = () => {
 
   return (
     <div style={{ height: "100%", width: "100%", position: "relative" }}>
-      <SigmaContainerWithCleanup style={{ height: "100%", width: "100%" }} settings={SETTINGS} graph={graph}>
+      <SigmaContainer style={{ height: "100%", width: "100%" }} settings={SETTINGS} graph={graph}>
         <CameraControls />
-      </SigmaContainerWithCleanup>
+      </SigmaContainer>
     </div>
   );
 };

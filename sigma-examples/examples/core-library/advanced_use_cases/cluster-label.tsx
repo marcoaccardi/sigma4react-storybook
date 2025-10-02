@@ -21,11 +21,12 @@ import Graph from "graphology";
 import { MultiGraph } from "graphology";
 import type { SerializedGraph, Attributes } from "graphology-types";
 import iwanthue from "iwanthue";
-import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import bindLeafletLayer from "@sigma/layer-leaflet";
 import "@react-sigma/core/lib/style.css";
 import "leaflet/dist/leaflet.css";
 import euroSISData from "@/data/graphs/euroSIS.json";
+import "./cluster-label.css";
 
 const SETTINGS = {
   renderLabels: false, // Hide node labels to focus on cluster labels
@@ -193,17 +194,7 @@ const ClusterLabels: FC<{ clusters: Record<string, Cluster> | null; showLabels: 
   if (!clusters || !showLabels) return null;
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        pointerEvents: "none", // Allow clicks to pass through to the graph
-        zIndex: 1,
-      }}
-    >
+    <div className="cluster-labels-overlay">
       {Object.entries(clusters).map(([country, cluster]) => {
         const pos = labelPositions[country];
         if (!pos) return null;
@@ -211,22 +202,11 @@ const ClusterLabels: FC<{ clusters: Record<string, Cluster> | null; showLabels: 
         return (
           <div
             key={country}
+            className="cluster-label"
             style={{
-              position: "absolute",
               top: pos.y,
               left: pos.x,
-              transform: "translate(-50%, -50%)", // Center the label on the point
               color: cluster.color,
-              fontSize: "18px",
-              fontWeight: "700",
-              fontFamily: "system-ui, -apple-system, sans-serif",
-              textTransform: "uppercase",
-              letterSpacing: "0.5px",
-              textShadow: "0 0 4px rgba(255,255,255,0.9), 0 0 8px rgba(255,255,255,0.7), 0 1px 2px rgba(0,0,0,0.3)",
-              whiteSpace: "nowrap",
-              transition: "opacity 0.2s",
-              opacity: 0.95,
-              WebkitFontSmoothing: "antialiased",
             }}
           >
             {cluster.label}
@@ -280,98 +260,43 @@ const ClusterLegend: FC<{ clusters: Record<string, Cluster> | null; showLabels: 
   const sortedClusters = Object.values(clusters).sort((a, b) => a.label.localeCompare(b.label));
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        bottom: "20px",
-        left: "20px",
-        background: "white",
-        padding: isExpanded ? "16px" : "12px",
-        borderRadius: "8px",
-        boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
-        maxHeight: "calc(100vh - 100px)",
-        overflowY: "auto",
-        fontFamily: "system-ui, -apple-system, sans-serif",
-        minWidth: "200px",
-        maxWidth: "280px",
-      }}
-    >
+    <div className={`cluster-legend ${isExpanded ? 'expanded' : 'collapsed'}`}>
       {/* Header */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: isExpanded ? "12px" : "0",
-        }}
-      >
-        <h3 style={{ margin: 0, fontSize: "16px", fontWeight: "600", color: "#111" }}>
+      <div className={`cluster-legend-header ${isExpanded ? 'expanded' : 'collapsed'}`}>
+        <h3 className="cluster-legend-title">
           Countries ({sortedClusters.length})
         </h3>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          style={{
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            fontSize: "18px",
-            padding: "4px",
-            color: "#666",
-          }}
+          className="cluster-legend-toggle"
         >
           {isExpanded ? "▼" : "▶"}
         </button>
       </div>
 
       {isExpanded && (
-        <>
+        <div className="cluster-legend-content">
           {/* Toggle labels button */}
           <button
             onClick={onToggleLabels}
-            style={{
-              width: "100%",
-              padding: "8px 12px",
-              marginBottom: "12px",
-              fontSize: "13px",
-              fontWeight: "500",
-              color: showLabels ? "#fff" : "#666",
-              background: showLabels ? "linear-gradient(135deg, #667eea 0%, #764ba2 100%)" : "#f0f0f0",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-              transition: "all 0.2s",
-            }}
+            className={`cluster-legend-button ${showLabels ? 'active' : 'inactive'}`}
           >
             {showLabels ? "Hide" : "Show"} Cluster Labels
           </button>
 
           {/* Cluster list */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+          <div className="cluster-list">
             {sortedClusters.map((cluster) => (
-              <div
-                key={cluster.label}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  fontSize: "13px",
-                }}
-              >
+              <div key={cluster.label} className="cluster-list-item">
                 <div
-                  style={{
-                    width: "16px",
-                    height: "16px",
-                    borderRadius: "3px",
-                    background: cluster.color,
-                    flexShrink: 0,
-                    boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
-                  }}
+                  className="cluster-color-swatch"
+                  style={{ background: cluster.color }}
                 />
-                <span style={{ color: "#333" }}>{cluster.label}</span>
+                <span className="cluster-label-text">{cluster.label}</span>
               </div>
             ))}
           </div>
-        </>
+        </div>
       )}
     </div>
   );
@@ -383,12 +308,12 @@ export const ClusterLabel: FC = () => {
   const [showLabels, setShowLabels] = useState(true);
 
   return (
-    <div style={{ height: "100%", width: "100%", position: "relative" }}>
-      <SigmaContainerWithCleanup style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
+    <div className="cluster-label-container">
+      <SigmaContainer className="cluster-label-sigma-container" settings={SETTINGS}>
         <LoadClusterGraph onClustersReady={setClusters} />
         <LeafletMapLayer />
         <ClusterLabels clusters={clusters} showLabels={showLabels} />
-      </SigmaContainerWithCleanup>
+      </SigmaContainer>
       <ClusterLegend
         clusters={clusters}
         showLabels={showLabels}

@@ -1,33 +1,33 @@
 /**
- * SigmaContainerWithCleanup
+ * SigmaContainer
  *
  * A wrapper around @react-sigma/core's SigmaContainer that adds proper cleanup.
  *
  * PROBLEM:
- * The original SigmaContainer has a bug where its useEffect (lines 92-110) lacks
- * a cleanup function to call sigma.kill() on unmount. This causes WebGL context leaks.
+ * The original SigmaContainer from @react-sigma/core has a bug where its useEffect (lines 92-110)
+ * lacks a cleanup function to call sigma.kill() on unmount. This causes WebGL context leaks.
  *
  * SOLUTION:
- * This wrapper injects a cleanup helper component INSIDE the SigmaContainer that:
+ * This wrapper injects a cleanup helper component INSIDE the original SigmaContainer that:
  * 1. Uses useSigma() to access the Sigma instance directly
  * 2. Kills the instance in its cleanup effect (which runs BEFORE container unmounts)
  * 3. Prevents the WebGL context from leaking
  *
  * USAGE:
- * Replace all <SigmaContainer> with <SigmaContainerWithCleanup> in your examples:
+ * Use this component exactly like the original SigmaContainer:
  *
  * ```tsx
- * import { SigmaContainerWithCleanup } from '@/components/SigmaContainerWithCleanup';
+ * import { SigmaContainer } from '@/components/SigmaContainer';
  *
- * <SigmaContainerWithCleanup style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
+ * <SigmaContainer style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
  *   <LoadGraph />
- * </SigmaContainerWithCleanup>
+ * </SigmaContainer>
  * ```
  */
 
 import { forwardRef, useEffect, type FC } from 'react';
 import type { ForwardedRef, PropsWithChildren, ReactElement } from 'react';
-import { SigmaContainer, useSigma } from '@react-sigma/core';
+import { SigmaContainer as OriginalSigmaContainer, useSigma } from '@react-sigma/core';
 import type { Attributes } from 'graphology-types';
 import type { Sigma } from 'sigma';
 import type { Settings } from 'sigma/settings';
@@ -42,9 +42,9 @@ interface SigmaContainerProps<N extends Attributes, E extends Attributes, G exte
 }
 
 /**
- * Internal cleanup helper that runs inside SigmaContainer
+ * Internal cleanup helper that runs inside the original SigmaContainer
  * This component accesses the Sigma instance via useSigma() and kills it on unmount.
- * Since it's a child of SigmaContainer, its cleanup runs BEFORE the container unmounts.
+ * Since it's a child of the container, its cleanup runs BEFORE the container unmounts.
  */
 const SigmaCleanupHelper: FC = () => {
   const sigma = useSigma();
@@ -65,7 +65,7 @@ const SigmaCleanupHelper: FC = () => {
   return null;
 };
 
-function SigmaContainerWithCleanupComponent<
+function SigmaContainerComponent<
   N extends Attributes = Attributes,
   E extends Attributes = Attributes,
   G extends Attributes = Attributes,
@@ -74,16 +74,16 @@ function SigmaContainerWithCleanupComponent<
   forwardedRef: ForwardedRef<Sigma<N, E, G> | null>
 ) {
   return (
-    <SigmaContainer<N, E, G> ref={forwardedRef} {...props}>
+    <OriginalSigmaContainer<N, E, G> ref={forwardedRef} {...props}>
       {/* Cleanup helper must be first child to ensure it's created/destroyed at the right time */}
       <SigmaCleanupHelper />
       {children}
-    </SigmaContainer>
+    </OriginalSigmaContainer>
   );
 }
 
 // Export with proper typing for generics
-export const SigmaContainerWithCleanup = forwardRef(SigmaContainerWithCleanupComponent) as <
+export const SigmaContainer = forwardRef(SigmaContainerComponent) as <
   N extends Attributes = Attributes,
   E extends Attributes = Attributes,
   G extends Attributes = Attributes,

@@ -11,7 +11,8 @@
 
 import type { FC } from "react";
 import { useEffect } from "react";
-import { SigmaContainer, useLoadGraph, useSigma } from "@react-sigma/core";
+import { useLoadGraph, useSigma } from "@react-sigma/core";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import bindLeafletLayer from "@sigma/layer-leaflet";
 import Graph from "graphology";
 import type { Attributes } from "graphology-types";

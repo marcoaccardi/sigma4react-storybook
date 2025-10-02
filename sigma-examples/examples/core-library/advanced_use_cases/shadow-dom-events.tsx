@@ -21,7 +21,7 @@ import type { FC } from "react";
 import { useLoadGraph, useSigma, useRegisterEvents } from "@react-sigma/core";
 import Graph from "graphology";
 import type { SerializedGraph } from "graphology-types";
-import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
 import lesMiserablesData from "@/data/graphs/les-miserables.json";
 
@@ -373,8 +373,8 @@ export const ShadowDOMEvents: FC = () => {
   return (
     <div style={{ height: "100%", width: "100%", position: "relative" }}>
       {/* Note: In vanilla, the Sigma canvas is inside Shadow DOM. Here we use standard React with z-index.
-          The SigmaContainerWithCleanup automatically manages the mouse canvas z-index for event capture. */}
-      <SigmaContainerWithCleanup
+          The SigmaContainer automatically manages the mouse canvas z-index for event capture. */}
+      <SigmaContainer
         style={{
           height: "100%",
           width: "100%",
@@ -386,7 +386,7 @@ export const ShadowDOMEvents: FC = () => {
         <LoadGraph />
         <EdgeHoverEffect />
         <EventLogger onLog={handleLog} />
-      </SigmaContainerWithCleanup>
+      </SigmaContainer>
 
       {/* Log panel overlays the graph (z-index: 10) */}
       <EventLogPanel logs={logs} visible={showLogs} />

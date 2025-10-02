@@ -20,7 +20,7 @@ import { downloadAsPNG } from "@sigma/export-image";
 import { bindWebGLLayer, createContoursProgram } from "@sigma/layer-webgl";
 import { NodeImageProgram } from "@sigma/node-image";
 import { DEFAULT_NODE_PROGRAM_CLASSES } from "sigma/settings";
-import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
 
 // Settings
@@ -390,10 +390,10 @@ export const CustomLayersAndRenderers: FC = () => {
 
   return (
     <div style={{ height: "100%", width: "100%", position: "relative" }}>
-      <SigmaContainerWithCleanup style={{ height: "100%", width: "100%" }} settings={SETTINGS} graph={graph}>
+      <SigmaContainer style={{ height: "100%", width: "100%" }} settings={SETTINGS} graph={graph}>
         <ContoursLayer graph={graph} />
         <ExportControls graph={graph} />
-      </SigmaContainerWithCleanup>
+      </SigmaContainer>
     </div>
   );
 };

@@ -1,0 +1,128 @@
+.performance-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.performance-sigma-container {
+  flex: 1;
+  height: 100%;
+}
+
+.performance-panel {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: white;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 280px;
+  max-width: 320px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  z-index: 1000;
+}
+
+.performance-panel-title {
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.performance-control-group {
+  margin-bottom: 20px;
+}
+
+.performance-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.performance-input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.performance-input:focus {
+  border-color: #4a90e2;
+}
+
+.performance-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.performance-radio-label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #555;
+  cursor: pointer;
+}
+
+.performance-radio {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.performance-button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.performance-button {
+  padding: 12px 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: white;
+  color: #333;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.performance-button:hover {
+  background-color: #f5f5f5;
+  border-color: #ccc;
+}
+
+.performance-button-primary {
+  background-color: #4a90e2;
+  color: white;
+  border-color: #4a90e2;
+}
+
+.performance-button-primary:hover {
+  background-color: #3a80d2;
+  border-color: #3a80d2;
+}
+
+.performance-stats {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+  text-align: center;
+}
+
+.performance-stats-text {
+  color: #666;
+  font-size: 12px;
+}

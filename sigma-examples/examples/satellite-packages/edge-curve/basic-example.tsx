@@ -18,7 +18,8 @@
 
 import { useEffect } from "react";
 import type { FC } from "react";
-import { SigmaContainer, useLoadGraph } from "@react-sigma/core";
+import { useLoadGraph } from "@react-sigma/core";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import Graph from "graphology";
 import EdgeCurveProgram from "@sigma/edge-curve";
 import "@react-sigma/core/lib/style.css";

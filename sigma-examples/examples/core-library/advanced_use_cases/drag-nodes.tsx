@@ -17,7 +17,7 @@ import Graph from "graphology";
 import ForceSupervisor from "graphology-layout-force/worker";
 import chroma from "chroma-js";
 import { v4 as uuid } from "uuid";
-import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
 
 // Settings (immutable)
@@ -235,11 +235,11 @@ const styles: Record<string, React.CSSProperties> = {
 export const DragNodes: FC = () => {
   return (
     <div style={styles.container}>
-      <SigmaContainerWithCleanup style={styles.sigmaContainer} settings={SETTINGS}>
+      <SigmaContainer style={styles.sigmaContainer} settings={SETTINGS}>
         <LoadGraph />
         <ForceLayout />
         <InteractionHandler />
-      </SigmaContainerWithCleanup>
+      </SigmaContainer>
       <Instructions />
     </div>
   );

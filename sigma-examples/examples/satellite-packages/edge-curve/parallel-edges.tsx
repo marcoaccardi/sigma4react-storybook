@@ -12,7 +12,7 @@
  */
 
 import { FC, useMemo } from "react";
-import { SigmaContainer } from "@react-sigma/core";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import { MultiGraph } from "graphology";
 import { DEFAULT_EDGE_CURVATURE, EdgeCurvedArrowProgram, indexParallelEdgesIndex } from "@sigma/edge-curve";
 import { EdgeArrowProgram } from "sigma/rendering";

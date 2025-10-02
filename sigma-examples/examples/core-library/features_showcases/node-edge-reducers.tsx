@@ -11,11 +11,12 @@
  * - Performance optimization with skipIndexation
  */
 
-import { FC, useEffect, useState, useRef } from "react";
+import type { FC } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLoadGraph, useSigma, useRegisterEvents } from "@react-sigma/core";
 import Graph from "graphology";
 import type { Coordinates, EdgeDisplayData, NodeDisplayData } from "sigma/types";
-import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
 import lesMiserablesData from "@/data/graphs/les-miserables.json";
 
@@ -300,10 +301,10 @@ const ReducerController: FC = () => {
 export const NodeEdgeReducers: FC = () => {
   return (
     <div style={{ height: "100%", width: "100%", position: "relative" }}>
-      <SigmaContainerWithCleanup style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
+      <SigmaContainer style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
         <LoadGraph />
         <ReducerController />
-      </SigmaContainerWithCleanup>
+      </SigmaContainer>
     </div>
   );
 };

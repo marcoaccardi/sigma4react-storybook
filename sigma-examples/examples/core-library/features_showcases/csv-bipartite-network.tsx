@@ -24,7 +24,7 @@ import { cropToLargestConnectedComponent } from "graphology-components";
 import forceAtlas2 from "graphology-layout-forceatlas2";
 import circular from "graphology-layout/circular";
 import Papa from "papaparse";
-import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
 import csvDataPath from "@/data/csv/institutions-subjects.csv?url";
 
@@ -283,7 +283,7 @@ export const CsvBipartiteNetwork: FC = () => {
   return (
     <div style={{ height: "100%", width: "100%", position: "relative" }}>
       {isLoading && <LoadingSpinner />}
-      <SigmaContainerWithCleanup
+      <SigmaContainer
         style={{ height: "100%", width: "100%" }}
         settings={SETTINGS}
       >
@@ -292,7 +292,7 @@ export const CsvBipartiteNetwork: FC = () => {
           onLoadEnd={() => setIsLoading(false)}
         />
         {!isLoading && <Legend />}
-      </SigmaContainerWithCleanup>
+      </SigmaContainer>
     </div>
   );
 };

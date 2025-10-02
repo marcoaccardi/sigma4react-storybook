@@ -1,0 +1,148 @@
+.cluster-label-container {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.cluster-label-sigma-container {
+  height: 100%;
+  width: 100%;
+}
+
+/* Cluster Labels Overlay */
+.cluster-labels-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.cluster-label {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  font-weight: 700;
+  font-family: system-ui, -apple-system, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.9), 0 0 8px rgba(255, 255, 255, 0.7), 0 1px 2px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+  transition: opacity 0.2s;
+  opacity: 0.95;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Cluster Legend */
+.cluster-legend {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  font-family: system-ui, -apple-system, sans-serif;
+  min-width: 200px;
+  max-width: 280px;
+}
+
+.cluster-legend.expanded {
+  padding: 16px;
+}
+
+.cluster-legend.collapsed {
+  padding: 12px;
+}
+
+.cluster-legend-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cluster-legend-header.expanded {
+  margin-bottom: 12px;
+}
+
+.cluster-legend-header.collapsed {
+  margin-bottom: 0;
+}
+
+.cluster-legend-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+}
+
+.cluster-legend-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 4px;
+  color: #666;
+}
+
+.cluster-legend-toggle:hover {
+  color: #333;
+}
+
+.cluster-legend-content {
+  /* Container for legend button and list */
+}
+
+.cluster-legend-button {
+  width: 100%;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cluster-legend-button.active {
+  color: #fff;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.cluster-legend-button.inactive {
+  color: #666;
+  background: #f0f0f0;
+}
+
+.cluster-legend-button:hover {
+  opacity: 0.9;
+}
+
+.cluster-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cluster-list-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.cluster-color-swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.cluster-label-text {
+  color: #333;
+}

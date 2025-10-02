@@ -12,7 +12,8 @@
  */
 
 import { FC, useEffect, useState } from "react";
-import { SigmaContainer, useLoadGraph, useSigma } from "@react-sigma/core";
+import { useLoadGraph, useSigma } from "@react-sigma/core";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import { MultiGraph } from "graphology";
 import EdgeCurveProgram, {
   EdgeCurvedArrowProgram,

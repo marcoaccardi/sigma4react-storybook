@@ -25,7 +25,7 @@ import { useWorkerLayoutForceAtlas2 } from "@react-sigma/layout-forceatlas2";
 import Graph from "graphology";
 import forceAtlas2 from "graphology-layout-forceatlas2";
 import jsonld, { type NodeObject } from "jsonld";
-import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
 import pinaColadaData from "@/data/graphs/pina-colada.jsonld";
 
@@ -354,11 +354,11 @@ export const JSONLDRDFGraph: FC = () => {
 
   return (
     <div style={{ height: "100%", width: "100%", position: "relative" }}>
-      <SigmaContainerWithCleanup style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
+      <SigmaContainer style={{ height: "100%", width: "100%" }} settings={SETTINGS}>
         <LoadRDFGraph onGraphReady={handleGraphReady} />
         {/* Only render ForceAtlas2Controls after graph is loaded */}
         {graphReady && <ForceAtlas2Controls />}
-      </SigmaContainerWithCleanup>
+      </SigmaContainer>
 
       <RDFGraphInfo stats={graphStats} />
     </div>

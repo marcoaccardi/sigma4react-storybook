@@ -12,7 +12,8 @@
 
 import type { FC } from "react";
 import { useEffect, useState } from "react";
-import { SigmaContainer, useLoadGraph, useRegisterEvents, useSigma } from "@react-sigma/core";
+import { useLoadGraph, useRegisterEvents, useSigma } from "@react-sigma/core";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import EdgeCurveProgram from "@sigma/edge-curve";
 import Graph from "graphology";
 import type { EdgeDisplayData, NodeDisplayData } from "sigma/types";

@@ -19,7 +19,7 @@ import Graph from "graphology";
 import { NodeImageProgram } from "@sigma/node-image";
 import { NodeBorderProgram } from "@sigma/node-border";
 import ForceSupervisor from "graphology-layout-force/worker";
-import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
+import { SigmaContainer } from "@/components/SigmaContainer";
 import "@react-sigma/core/lib/style.css";
 
 // Color constants
@@ -200,9 +200,9 @@ export const CustomRendering: FC = () => {
   const settings = useMemo(() => SETTINGS, []);
 
   return (
-    <SigmaContainerWithCleanup style={{ height: "100%", width: "100%" }} settings={settings}>
+    <SigmaContainer style={{ height: "100%", width: "100%" }} settings={settings}>
       <LoadGraph />
       <ForceLayoutController />
-    </SigmaContainerWithCleanup>
+    </SigmaContainer>
   );
 };
