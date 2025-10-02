@@ -11,7 +11,8 @@
  * - Multiple edge programs with different arrow configurations
  */
 
-import { FC, useEffect, useState } from "react";
+import type { FC } from "react";
+import { useEffect, useState } from "react";
 import { useLoadGraph, useSigma } from "@react-sigma/core";
 import { SigmaContainer } from "@/components/SigmaContainer";
 import { MultiGraph } from "graphology";

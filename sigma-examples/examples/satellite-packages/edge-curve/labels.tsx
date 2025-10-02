@@ -11,7 +11,8 @@
  * - Custom edge programs (EdgeArrowProgram and EdgeCurveProgram)
  */
 
-import { FC, useEffect } from 'react';
+import type { FC } from 'react';
+import { useEffect } from 'react';
 import { useLoadGraph } from '@react-sigma/core';
 import { SigmaContainer } from '@/components/SigmaContainer';
 import { MultiGraph } from 'graphology';
