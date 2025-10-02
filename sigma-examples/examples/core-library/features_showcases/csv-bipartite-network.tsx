@@ -26,6 +26,7 @@ import circular from "graphology-layout/circular";
 import Papa from "papaparse";
 import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
 import "@react-sigma/core/lib/style.css";
+import csvDataPath from "@/data/csv/institutions-subjects.csv?url";
 
 // Settings (immutable)
 const SETTINGS = {
@@ -62,7 +63,7 @@ const LoadCsvGraph: FC<{
     onLoadStart();
 
     // Parse CSV file using PapaParse
-    Papa.parse<CsvRow>("/data.csv", {
+    Papa.parse<CsvRow>(csvDataPath, {
       download: true,
       header: true,
       delimiter: ",",

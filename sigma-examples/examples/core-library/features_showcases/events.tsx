@@ -15,6 +15,7 @@ import { useLoadGraph, useSigma, useRegisterEvents } from "@react-sigma/core";
 import Graph from "graphology";
 import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
 import "@react-sigma/core/lib/style.css";
+import lesMiserablesData from "@/data/graphs/les-miserables.json";
 
 // Track if graph has been loaded (persists across StrictMode remounts)
 let graphLoaded = false;
@@ -43,41 +44,12 @@ const LoadGraph: FC = () => {
     // Only load once - prevents double loading in React StrictMode
     if (graphLoaded) return;
 
-    let cancelled = false;
+    // Create graph and import JSON data
+    const graph = new Graph();
+    graph.import(lesMiserablesData);
 
-    // Fetch JSON file from public folder
-    fetch("/les-miserables.json")
-      .then((res) => res.json())
-      .then((data) => {
-        if (cancelled) return;
-
-        // Create graph and import JSON data
-        const graph = new Graph();
-        graph.import(data);
-
-        loadGraph(graph);
-        graphLoaded = true;
-      })
-      .catch((error) => {
-        if (cancelled) return;
-        console.error("Error loading graph data:", error);
-
-        // Create fallback graph
-        const fallbackGraph = new Graph();
-        fallbackGraph.addNode("1", {
-          x: 0,
-          y: 0,
-          size: 10,
-          label: "Error loading data",
-          color: "#ff0000",
-        });
-        loadGraph(fallbackGraph);
-        graphLoaded = true;
-      });
-
-    return () => {
-      cancelled = true;
-    };
+    loadGraph(graph);
+    graphLoaded = true;
   }, [loadGraph]);
 
   return null;

@@ -49,7 +49,7 @@ const LoadGraph: FC = () => {
       size: 15,
       label: "John",
       type: "image",
-      image: "./user.svg",
+      image: "/src/data/assets/user.svg",
       color: RED,
     });
 
@@ -57,7 +57,7 @@ const LoadGraph: FC = () => {
       size: 15,
       label: "Mary",
       type: "image",
-      image: "./user.svg",
+      image: "/src/data/assets/user.svg",
       color: RED,
     });
 
@@ -65,7 +65,7 @@ const LoadGraph: FC = () => {
       size: 15,
       label: "Suzan",
       type: "image",
-      image: "./user.svg",
+      image: "/src/data/assets/user.svg",
       color: RED,
     });
 
@@ -74,7 +74,7 @@ const LoadGraph: FC = () => {
       size: 15,
       label: "Nantes",
       type: "image",
-      image: "./city.svg",
+      image: "/src/data/assets/city.svg",
       color: BLUE,
     });
 
@@ -82,7 +82,7 @@ const LoadGraph: FC = () => {
       size: 15,
       label: "New-York",
       type: "image",
-      image: "./city.svg",
+      image: "/src/data/assets/city.svg",
       color: BLUE,
     });
 

@@ -23,6 +23,7 @@ import Graph from "graphology";
 import type { SerializedGraph } from "graphology-types";
 import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
 import "@react-sigma/core/lib/style.css";
+import lesMiserablesData from "@/data/graphs/les-miserables.json";
 
 const SETTINGS = {
   renderLabels: true,
@@ -51,28 +52,13 @@ const LoadGraph: FC = () => {
     // Only load once - prevents double loading in React StrictMode
     if (graphLoaded) return;
 
-    let cancelled = false;
+    const data = lesMiserablesData as unknown as SerializedGraph;
 
-    // Fetch JSON file from public folder
-    fetch("/les-miserables.json")
-      .then((res) => res.json())
-      .then((data: SerializedGraph) => {
-        if (cancelled) return;
+    const graph = new Graph();
+    graph.import(data);
 
-        const graph = new Graph();
-        graph.import(data);
-
-        loadGraph(graph);
-        graphLoaded = true;
-      })
-      .catch((error) => {
-        if (cancelled) return;
-        console.error("Error loading graph:", error);
-      });
-
-    return () => {
-      cancelled = true;
-    };
+    loadGraph(graph);
+    graphLoaded = true;
   }, [loadGraph]);
 
   return null;

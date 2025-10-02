@@ -27,6 +27,7 @@ import forceAtlas2 from "graphology-layout-forceatlas2";
 import jsonld, { type NodeObject } from "jsonld";
 import { SigmaContainerWithCleanup } from "../../../src/components/SigmaContainerWithCleanup";
 import "@react-sigma/core/lib/style.css";
+import pinaColadaData from "@/data/graphs/pina-colada.jsonld";
 
 const SETTINGS = {
   minCameraRatio: 0.08,
@@ -135,53 +136,43 @@ const LoadRDFGraph: FC<{ onGraphReady: (stats: { nodes: number; edges: number })
     // Only load once - prevents double loading in React StrictMode
     if (graphLoaded) return;
 
-    let cancelled = false;
-
     // Reset global ID counter
     globalId = 0;
 
-    // Fetch JSON-LD file from public folder
-    fetch("/pina-colada.jsonld")
-      .then((res) => res.json())
-      .then(async (rdf) => {
-        if (cancelled) return;
+    // Process JSON-LD data
+    const processData = async () => {
+      // Create directed multi-graph (allows multiple edges between same nodes)
+      const graph = new Graph({ type: "directed", multi: true });
 
-        // Create directed multi-graph (allows multiple edges between same nodes)
-        const graph = new Graph({ type: "directed", multi: true });
+      // Expand the JSON-LD to a full RDF graph
+      const expanded = await jsonld.expand(pinaColadaData);
 
-        // Expand the JSON-LD to a full RDF graph
-        const expanded = await jsonld.expand(rdf);
+      // Parse each expanded item
+      for (const item of expanded) {
+        parseJsonLdExtended(item, graph);
+      }
 
-        // Parse each expanded item
-        for (const item of expanded) {
-          parseJsonLdExtended(item, graph);
-        }
-
-        // Load the graph
-        loadGraph(graph);
-        onGraphReady({ nodes: graph.order, edges: graph.size });
-        graphLoaded = true;
-      })
-      .catch((error) => {
-        if (cancelled) return;
-        console.error("Error loading JSON-LD:", error);
-
-        // Create a simple fallback graph
-        const fallbackGraph = new Graph();
-        fallbackGraph.addNode("error", {
-          x: 0,
-          y: 0,
-          size: 10,
-          label: "Error loading RDF data",
-          color: "#ff0000",
-        });
-        loadGraph(fallbackGraph);
-        graphLoaded = true;
-      });
-
-    return () => {
-      cancelled = true;
+      // Load the graph
+      loadGraph(graph);
+      onGraphReady({ nodes: graph.order, edges: graph.size });
+      graphLoaded = true;
     };
+
+    processData().catch((error) => {
+      console.error("Error loading JSON-LD:", error);
+
+      // Create a simple fallback graph
+      const fallbackGraph = new Graph();
+      fallbackGraph.addNode("error", {
+        x: 0,
+        y: 0,
+        size: 10,
+        label: "Error loading RDF data",
+        color: "#ff0000",
+      });
+      loadGraph(fallbackGraph);
+      graphLoaded = true;
+    });
   }, [loadGraph, onGraphReady]);
 
   return null;

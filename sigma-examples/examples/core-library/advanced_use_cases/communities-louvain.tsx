@@ -25,7 +25,7 @@ import { fitViewportToNodes } from "@sigma/utils";
 import "@react-sigma/core/lib/style.css";
 
 // Import Les Misérables data
-import lesMiserablesData from "../../../src/data/les-miserables.json";
+import lesMiserablesData from "@/data/graphs/les-miserables.json";
 
 // Settings (immutable)
 const SETTINGS = {
